@@ -1,0 +1,737 @@
+const analytical_unit13_mcq = [
+  // =========================
+  // Unit 13: Puzzle Test
+  // 15 Self-Assessment Based MCQs
+  // =========================
+
+  {
+    id: "AS2-U13-SA-01",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Linear Seating Arrangement",
+    question: "A, B, C, D, E, F and G are sitting in a row facing North. F is to the immediate right of E. E is 4th to the right of G. C is the neighbour of B and D. The person who is third to the left of D is at one of the ends. Who are to the left of C?",
+    options: {
+      A: "Only B",
+      B: "G, B and D",
+      C: "G and B",
+      D: "D, E, F and A"
+    },
+    answer: "C",
+    solution: "The arrangement from left to right is: G B C D E F A. Therefore, the people to the left of C are G and B.",
+    shortcut: "For row puzzles, number the seats first, then place fixed-position clues."
+  },
+  {
+    id: "AS2-U13-SA-02",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Linear Seating Arrangement",
+    question: "Using the same arrangement: G B C D E F A. Which statement is not true?",
+    options: {
+      A: "E is to the immediate left of D",
+      B: "A is at one of the ends",
+      C: "G is to the immediate left of B",
+      D: "F is second to the right of D"
+    },
+    answer: "A",
+    solution: "In the arrangement G B C D E F A, E is immediately to the right of D, not to the left. So option A is false.",
+    shortcut: "When facing North, left-to-right on paper is actual left-to-right."
+  },
+  {
+    id: "AS2-U13-SA-03",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Linear Seating Arrangement",
+    question: "Using the arrangement G B C D E F A, who are the neighbours of B?",
+    options: {
+      A: "C and D",
+      B: "C and G",
+      C: "G and F",
+      D: "C and E"
+    },
+    answer: "B",
+    solution: "B is placed between G and C. Therefore, the neighbours of B are G and C.",
+    shortcut: "Neighbours are the immediate left and immediate right persons."
+  },
+  {
+    id: "AS2-U13-SA-04",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Linear Seating Arrangement",
+    question: "Using the arrangement G B C D E F A, what is the position of A?",
+    options: {
+      A: "Between E and D",
+      B: "Extreme left",
+      C: "Centre",
+      D: "Extreme right"
+    },
+    answer: "D",
+    solution: "The arrangement is G B C D E F A. A is at the last position, so A is at the extreme right.",
+    shortcut: "First and last positions are called extreme ends."
+  },
+  {
+    id: "AS2-U13-SA-05",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Parallel Row Arrangement",
+    question: "Five men A, B, C, D and E face South, and five ladies M, N, O, P and Q face North in a parallel row. The opposite pairs are A-M, B-N, C-O, D-P and E-Q. Who is opposite to C?",
+    options: {
+      A: "M",
+      B: "O",
+      C: "P",
+      D: "Q"
+    },
+    answer: "B",
+    solution: "From the given opposite pairs, C is directly opposite O.",
+    shortcut: "In two-row puzzles, first write the opposite pairs column-wise."
+  },
+  {
+    id: "AS2-U13-SA-06",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Parallel Row Arrangement",
+    question: "In the same parallel-row arrangement, if B and E exchange their seats, who will be opposite to N?",
+    options: {
+      A: "B",
+      B: "C",
+      C: "D",
+      D: "E"
+    },
+    answer: "D",
+    solution: "Initially, B is opposite N. After B and E exchange seats, E takes B's place. Therefore, E becomes opposite N.",
+    shortcut: "For exchange questions, change only the mentioned positions."
+  },
+  {
+    id: "AS2-U13-SA-07",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Parallel Row Arrangement",
+    question: "In the same arrangement, which pair is directly opposite to each other?",
+    options: {
+      A: "A and Q",
+      B: "B and P",
+      C: "D and P",
+      D: "E and M"
+    },
+    answer: "C",
+    solution: "The given opposite pairs are A-M, B-N, C-O, D-P and E-Q. Hence, D and P are directly opposite.",
+    shortcut: "Directly opposite means same column, different row."
+  },
+  {
+    id: "AS2-U13-SA-08",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Circular Seating Arrangement",
+    question: "Eight friends A, B, C, D, E, F, G and H sit in a circle facing the centre. The clockwise arrangement is A, C, E, H, F, D, B, G. Who are the three friends sitting immediately to the right of B?",
+    options: {
+      A: "D F H",
+      B: "G A C",
+      C: "A C E",
+      D: "None of these"
+    },
+    answer: "B",
+    solution: "In the clockwise arrangement A C E H F D B G, moving right from B gives G, then A, then C. So the three friends are G, A and C.",
+    shortcut: "For circular puzzles, fix one direction and keep moving seat by seat."
+  },
+  {
+    id: "AS2-U13-SA-09",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Circular Seating Arrangement",
+    question: "In the circular arrangement A, C, E, H, F, D, B, G, who are the immediate neighbours of D?",
+    options: {
+      A: "B and F",
+      B: "F and H",
+      C: "B and G",
+      D: "A and C"
+    },
+    answer: "A",
+    solution: "D is placed between F and B. Therefore, the immediate neighbours of D are F and B.",
+    shortcut: "In a circle, every person has two immediate neighbours."
+  },
+  {
+    id: "AS2-U13-SA-10",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Circular Seating Arrangement",
+    question: "In the circular arrangement A, C, E, H, F, D, B, G, who is sitting directly opposite to G?",
+    options: {
+      A: "C",
+      B: "E",
+      C: "H",
+      D: "F"
+    },
+    answer: "C",
+    solution: "There are 8 people, so the opposite person is 4 seats away. Starting from G and moving 4 seats gives H. So H is opposite G.",
+    shortcut: "For 8 people in a circle, opposite person = 4 seats away."
+  },
+  {
+    id: "AS2-U13-SA-11",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Sequential Order Puzzle",
+    question: "A refresher course runs from Saturday to Friday. Sunday is a holiday. The course starts with Psychology. Philosophy is immediately after the holiday. Science is immediately before Engineering. Mechanics is the last subject. There is one subject between Economics and Engineering. Which subject starts the course?",
+    options: {
+      A: "Psychology",
+      B: "Mechanics",
+      C: "Philosophy",
+      D: "Economics"
+    },
+    answer: "A",
+    solution: "The condition directly states that the course starts with Psychology.",
+    shortcut: "In sequential puzzles, place direct clues first."
+  },
+  {
+    id: "AS2-U13-SA-12",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Sequential Order Puzzle",
+    question: "Using the same schedule: Saturday Psychology, Sunday Holiday, Monday Philosophy, Tuesday Economics, Wednesday Science, Thursday Engineering, Friday Mechanics. Which subject will be on Tuesday?",
+    options: {
+      A: "Mechanics",
+      B: "Engineering",
+      C: "Economics",
+      D: "Science"
+    },
+    answer: "C",
+    solution: "From the final schedule, Tuesday is assigned to Economics.",
+    shortcut: "Make a day-wise table to avoid confusion."
+  },
+  {
+    id: "AS2-U13-SA-13",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Sequential Order Puzzle",
+    question: "Using the same schedule, which subject immediately precedes Mechanics?",
+    options: {
+      A: "Economics",
+      B: "Engineering",
+      C: "Philosophy",
+      D: "Psychology"
+    },
+    answer: "B",
+    solution: "The last two days are Thursday Engineering and Friday Mechanics. Therefore, Engineering immediately precedes Mechanics.",
+    shortcut: "Immediately before means just one position earlier."
+  },
+  {
+    id: "AS2-U13-SA-14",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Family Based Puzzle",
+    question: "P, Q, R, S, T and U are six family members with two married couples. T is married to S, who is the doctor and mother of R and U. Q is married to P. P has one son and one grandson. How is P related to R?",
+    options: {
+      A: "Grandfather",
+      B: "Mother",
+      C: "Sister",
+      D: "Grandmother"
+    },
+    answer: "D",
+    solution: "S is the mother of R and U. T is married to S, so T and S form one couple. Q and P form the older couple. P has one son and one grandson, so P is the grandmother of R.",
+    shortcut: "Draw generations: grandparents → parents → children."
+  },
+  {
+    id: "AS2-U13-SA-15",
+    unit: 13,
+    category: "Self-Assessment Based",
+    topic: "Family Based Puzzle",
+    question: "In the same family puzzle, which group definitely represents all females in the family?",
+    options: {
+      A: "P, S, R",
+      B: "P, S, U",
+      C: "Q, T, R",
+      D: "Data inadequate"
+    },
+    answer: "D",
+    solution: "P and S are females, but the gender of R and U is not clearly fixed. Therefore, the complete group of females cannot be determined.",
+    shortcut: "In family puzzles, do not assume gender unless it is clearly given."
+  },
+
+  // =========================
+  // 20 Concept MCQs
+  // =========================
+
+  {
+    id: "AS2-U13-C-16",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Puzzle Test Basics",
+    question: "Puzzle Test questions mainly require the student to:",
+    options: {
+      A: "Memorize formulas only",
+      B: "Arrange given information systematically",
+      C: "Find compound interest",
+      D: "Calculate speed"
+    },
+    answer: "B",
+    solution: "Puzzle Test questions give raw information that must be arranged logically to answer the questions.",
+    shortcut: "Puzzle = arrange clues + answer questions."
+  },
+  {
+    id: "AS2-U13-C-17",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Direct Information",
+    question: "In a puzzle, direct information means:",
+    options: {
+      A: "Information clearly given in the question",
+      B: "Information guessed by the student",
+      C: "Information not useful in solving",
+      D: "Information from outside the question"
+    },
+    answer: "A",
+    solution: "Direct information is the information clearly stated in the question, such as 'A sits at the extreme left'.",
+    shortcut: "Direct clue = place it immediately."
+  },
+  {
+    id: "AS2-U13-C-18",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Indirect Information",
+    question: "Indirect information in a puzzle is obtained by:",
+    options: {
+      A: "Ignoring the clues",
+      B: "Connecting two or more clues",
+      C: "Choosing any option randomly",
+      D: "Using only the last sentence"
+    },
+    answer: "B",
+    solution: "Indirect information is found by combining different clues and finding hidden relationships.",
+    shortcut: "Indirect clue = combine clues."
+  },
+  {
+    id: "AS2-U13-C-19",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Linear Arrangement",
+    question: "If five people are sitting in a row facing North, the left side on paper represents:",
+    options: {
+      A: "Actual right",
+      B: "Actual left",
+      C: "Opposite side",
+      D: "Cannot be decided"
+    },
+    answer: "B",
+    solution: "When people face North, their left and right match the left and right side of the paper.",
+    shortcut: "Facing North: paper-left = actual left."
+  },
+  {
+    id: "AS2-U13-C-20",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Linear Arrangement",
+    question: "If five people are sitting in a row facing South, the right side of the person is:",
+    options: {
+      A: "Paper-left",
+      B: "Paper-right",
+      C: "Always centre",
+      D: "Always extreme end"
+    },
+    answer: "A",
+    solution: "When a person faces South, his/her right side is towards the left side of the paper.",
+    shortcut: "Facing South: left-right gets reversed."
+  },
+  {
+    id: "AS2-U13-C-21",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Immediate Position",
+    question: "If A is immediately to the right of B, then:",
+    options: {
+      A: "There is one person between A and B",
+      B: "A and B are adjacent",
+      C: "A is two places away from B",
+      D: "B must be at the end"
+    },
+    answer: "B",
+    solution: "Immediately right means the person is placed directly next to the other person on the right side.",
+    shortcut: "Immediate = adjacent."
+  },
+  {
+    id: "AS2-U13-C-22",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Gap Concept",
+    question: "If one person sits between A and B, then the gap between A and B is:",
+    options: {
+      A: "0 seat",
+      B: "1 seat",
+      C: "2 seats",
+      D: "3 seats"
+    },
+    answer: "B",
+    solution: "One person between A and B means exactly one seat/person is placed between them.",
+    shortcut: "One between = gap of 1."
+  },
+  {
+    id: "AS2-U13-C-23",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Circular Arrangement",
+    question: "In a circular arrangement of 8 people, the person directly opposite is how many seats away?",
+    options: {
+      A: "2",
+      B: "3",
+      C: "4",
+      D: "5"
+    },
+    answer: "C",
+    solution: "For 8 people, the opposite person is half of 8 seats away, which is 4 seats.",
+    shortcut: "Opposite in even circle = n/2 seats away."
+  },
+  {
+    id: "AS2-U13-C-24",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Circular Arrangement",
+    question: "In circular seating puzzles, the best first step is usually to:",
+    options: {
+      A: "Fix one person’s position",
+      B: "Leave all seats blank",
+      C: "Start from the last clue only",
+      D: "Ignore direction"
+    },
+    answer: "A",
+    solution: "Since a circle has no fixed start or end, fixing one person helps create a reference point.",
+    shortcut: "Circular puzzle shortcut: fix one person first."
+  },
+  {
+    id: "AS2-U13-C-25",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Comparison Puzzle",
+    question: "If A is taller than B and B is taller than C, then:",
+    options: {
+      A: "C is tallest",
+      B: "B is shortest",
+      C: "A is taller than C",
+      D: "A and C are equal"
+    },
+    answer: "C",
+    solution: "A > B and B > C, so A > C.",
+    shortcut: "Comparison chain: A > B > C."
+  },
+  {
+    id: "AS2-U13-C-26",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Comparison Puzzle",
+    question: "In comparison-based puzzles, the useful method is to arrange information in:",
+    options: {
+      A: "Ascending or descending order",
+      B: "Random order",
+      C: "Alphabetical order only",
+      D: "Calendar order only"
+    },
+    answer: "A",
+    solution: "Comparison puzzles become easy when we arrange persons or objects from smallest to largest or largest to smallest.",
+    shortcut: "Use < or > chain."
+  },
+  {
+    id: "AS2-U13-C-27",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Sequential Order",
+    question: "In sequential order puzzles, the phrase 'A is before B' means:",
+    options: {
+      A: "A must be immediately before B",
+      B: "A comes somewhere before B",
+      C: "A comes after B",
+      D: "A and B are same"
+    },
+    answer: "B",
+    solution: "'Before' means A occurs earlier than B, but not necessarily immediately before.",
+    shortcut: "Before = earlier; immediately before = adjacent earlier."
+  },
+  {
+    id: "AS2-U13-C-28",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Sequential Order",
+    question: "The phrase 'A is immediately after B' means:",
+    options: {
+      A: "A is anywhere after B",
+      B: "A is exactly next to B on the later side",
+      C: "A is before B",
+      D: "A is not related to B"
+    },
+    answer: "B",
+    solution: "Immediately after means A comes just after B with no gap.",
+    shortcut: "Immediately after = B A block."
+  },
+  {
+    id: "AS2-U13-C-29",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Family Puzzle",
+    question: "The best way to solve family-based puzzles is to:",
+    options: {
+      A: "Draw a family tree",
+      B: "Use only arithmetic",
+      C: "Ignore gender",
+      D: "Guess from names"
+    },
+    answer: "A",
+    solution: "Family tree diagrams clearly show generations, marriages, siblings and children.",
+    shortcut: "Family puzzle = draw family tree."
+  },
+  {
+    id: "AS2-U13-C-30",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Family Puzzle",
+    question: "Father's mother is called:",
+    options: {
+      A: "Aunt",
+      B: "Grandmother",
+      C: "Sister",
+      D: "Daughter"
+    },
+    answer: "B",
+    solution: "The mother of one's father is the grandmother.",
+    shortcut: "Father’s mother = paternal grandmother."
+  },
+  {
+    id: "AS2-U13-C-31",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Family Puzzle",
+    question: "Mother's brother is called:",
+    options: {
+      A: "Maternal uncle",
+      B: "Paternal uncle",
+      C: "Grandfather",
+      D: "Brother-in-law"
+    },
+    answer: "A",
+    solution: "The brother of one's mother is called maternal uncle.",
+    shortcut: "Mother side = maternal."
+  },
+  {
+    id: "AS2-U13-C-32",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Family Puzzle",
+    question: "If A and B have the same parents, then A and B are:",
+    options: {
+      A: "Cousins",
+      B: "Siblings",
+      C: "Grandparents",
+      D: "Uncle and aunt"
+    },
+    answer: "B",
+    solution: "People having the same parents are siblings.",
+    shortcut: "Same parents = siblings."
+  },
+  {
+    id: "AS2-U13-C-33",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Arrangement Strategy",
+    question: "In a seating puzzle, which clue should be placed first?",
+    options: {
+      A: "The most fixed clue",
+      B: "The vaguest clue",
+      C: "The option choices",
+      D: "The longest word"
+    },
+    answer: "A",
+    solution: "Fixed clues like 'A is at the extreme left' or 'B is in the centre' reduce possibilities immediately.",
+    shortcut: "Start with fixed-position clues."
+  },
+  {
+    id: "AS2-U13-C-34",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Extreme Ends",
+    question: "In a row of 7 people, how many extreme ends are there?",
+    options: {
+      A: "1",
+      B: "2",
+      C: "3",
+      D: "7"
+    },
+    answer: "B",
+    solution: "A row has two extreme ends: the extreme left and the extreme right.",
+    shortcut: "Row ends = 2."
+  },
+  {
+    id: "AS2-U13-C-35",
+    unit: 13,
+    category: "Concept MCQ",
+    topic: "Middle Position",
+    question: "In a row of 5 people, which position is exactly in the middle?",
+    options: {
+      A: "1st",
+      B: "2nd",
+      C: "3rd",
+      D: "5th"
+    },
+    answer: "C",
+    solution: "In a row of 5, the middle position is 3rd because two people are on each side.",
+    shortcut: "Middle of odd n = (n + 1) / 2."
+  },
+
+  // =========================
+  // 10 Tricky Exam MCQs
+  // =========================
+
+  {
+    id: "AS2-U13-T-36",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Linear Arrangement",
+    question: "Six persons P, Q, R, S, T and U sit in a row facing North. P is at the extreme left and U is at the extreme right. R is immediately right of P. Q is immediately left of U. S is between R and T. What is the position of S from the left?",
+    options: {
+      A: "2nd",
+      B: "3rd",
+      C: "4th",
+      D: "5th"
+    },
+    answer: "B",
+    solution: "The arrangement is P R S T Q U. Therefore, S is 3rd from the left.",
+    shortcut: "Place extreme-end clues first, then adjacent clues."
+  },
+  {
+    id: "AS2-U13-T-37",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Comparison Puzzle",
+    question: "Five students A, B, C, D and E are compared by height. B is shorter than A. A is shorter than D. D is shorter than E. E is shorter than C. Who is the tallest?",
+    options: {
+      A: "A",
+      B: "C",
+      C: "D",
+      D: "E"
+    },
+    answer: "B",
+    solution: "The order is B < A < D < E < C. Therefore, C is the tallest.",
+    shortcut: "Convert every clue into one comparison chain."
+  },
+  {
+    id: "AS2-U13-T-38",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Circular Arrangement",
+    question: "Six people A, B, C, D, E and F sit around a circular table facing the centre. A is opposite D. B is immediately right of A. E is immediately left of A. C sits between B and D. Who is opposite F?",
+    options: {
+      A: "A",
+      B: "B",
+      C: "C",
+      D: "E"
+    },
+    answer: "B",
+    solution: "Fix A. D is opposite A. B is to the immediate right of A and E is to the immediate left of A. C fits between B and D. The remaining seat is F. F is opposite B.",
+    shortcut: "For 6 people, opposite person is 3 seats away."
+  },
+  {
+    id: "AS2-U13-T-39",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Sequential Order",
+    question: "Five subjects Math, English, Science, History and Computer are taught from Monday to Friday. History is on Friday. Science is immediately after English. Math is before English. Computer is not on Monday. Which subject is taught on Thursday?",
+    options: {
+      A: "Math",
+      B: "English",
+      C: "Computer",
+      D: "Science"
+    },
+    answer: "C",
+    solution: "English and Science must be consecutive. Math is before English and History is Friday. The only possible schedule is Monday Math, Tuesday English, Wednesday Science, Thursday Computer, Friday History.",
+    shortcut: "Make blocks for immediate clues: English-Science."
+  },
+  {
+    id: "AS2-U13-T-40",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Family Puzzle",
+    question: "A and D are parents of B and C. B is the sister of C. If C is male, how is C related to D?",
+    options: {
+      A: "Son",
+      B: "Daughter",
+      C: "Brother",
+      D: "Father"
+    },
+    answer: "A",
+    solution: "D is a parent of C, and C is male. Therefore, C is the son of D.",
+    shortcut: "Parent + male child = son."
+  },
+  {
+    id: "AS2-U13-T-41",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Linear Arrangement",
+    question: "Seven students P, Q, R, S, T, U and V are sitting in a row facing North. P is at the extreme left. Q is immediately right of P. R is immediately right of Q. T is fourth from the left. U is second to the right of T. V sits at the remaining extreme end. Who sits between T and U?",
+    options: {
+      A: "R",
+      B: "S",
+      C: "V",
+      D: "Q"
+    },
+    answer: "B",
+    solution: "The arrangement is P Q R T S U V. Therefore, S sits between T and U.",
+    shortcut: "If U is second to right of T, one person is between T and U."
+  },
+  {
+    id: "AS2-U13-T-42",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Parallel Row Arrangement",
+    question: "In two rows, A, B, C face South and P, Q, R face North. A is opposite P. B is immediately right of A. Q is opposite B. Who is opposite C?",
+    options: {
+      A: "P",
+      B: "Q",
+      C: "R",
+      D: "Cannot be determined"
+    },
+    answer: "C",
+    solution: "The three opposite pairs must be A-P, B-Q and C-R. Therefore, C is opposite R.",
+    shortcut: "In parallel rows, match columns first."
+  },
+  {
+    id: "AS2-U13-T-43",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Comparison Puzzle",
+    question: "Among five boxes P, Q, R, S and T, P is heavier than Q but lighter than R. S is heavier than R. T is lighter than Q. Which box is the lightest?",
+    options: {
+      A: "P",
+      B: "Q",
+      C: "R",
+      D: "T"
+    },
+    answer: "D",
+    solution: "The order is T < Q < P < R < S. Hence, T is the lightest.",
+    shortcut: "Use '<' from light to heavy."
+  },
+  {
+    id: "AS2-U13-T-44",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Family Puzzle",
+    question: "X is the brother of Y. Y is the daughter of Z. Z is the wife of W. How is W related to X?",
+    options: {
+      A: "Father",
+      B: "Mother",
+      C: "Sister",
+      D: "Brother"
+    },
+    answer: "A",
+    solution: "Y is daughter of Z, and Z is wife of W. So W is the father of Y. Since X is Y's brother, W is also the father of X.",
+    shortcut: "Wife's child is also husband's child in standard family puzzles."
+  },
+  {
+    id: "AS2-U13-T-45",
+    unit: 13,
+    category: "Tricky Exam MCQ",
+    topic: "Circular Arrangement",
+    question: "Five friends A, B, C, D and E sit around a circular table facing the centre. B is second to the right of A. C is immediate left of B. D is not adjacent to A. Who sits immediately right of E?",
+    options: {
+      A: "A",
+      B: "B",
+      C: "C",
+      D: "D"
+    },
+    answer: "A",
+    solution: "Fix A. Place B second to the right of A. C is immediately left of B. D cannot be adjacent to A, so D takes the only non-adjacent remaining seat. E takes the last seat. Therefore, A is immediately right of E.",
+    shortcut: "In circular puzzles, fix A first and test the remaining seats."
+  }
+];
