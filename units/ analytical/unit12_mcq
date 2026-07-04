@@ -1,0 +1,761 @@
+const analytical_unit12_mcq = [
+  // =========================
+  // Unit 12: Data Sufficiency and Coding Inequalities
+  // 15 Self-Assessment Based MCQs
+  // =========================
+
+  {
+    id: "AS2-U12-SA-01",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Ranking",
+    question: "Among A, B, C, D, E and F, each has a different height. Who is the shortest?\nI. C is shorter than only B.\nII. A is taller than only D and F.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "D",
+    solution: "Statement I says B is tallest and C is second tallest. Statement II says only D and F are shorter than A. Even after combining, D and F can be interchanged, so the shortest person cannot be fixed.",
+    shortcut: "For ranking DS, check if one exact person is fixed, not just a group."
+  },
+  {
+    id: "AS2-U12-SA-02",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Direction",
+    question: "Point X is in which direction with respect to point Y?\nI. Point Z is at equal distance from both X and Y.\nII. From X, walking 5 km east, then 5 km south, then 5 km west leads to Y.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "B",
+    solution: "Statement I only gives equal distance, not direction. Statement II gives the net movement from X to Y as 5 km south. So Y is south of X, meaning X is north of Y.",
+    shortcut: "Direction shortcut: cancel opposite movements first."
+  },
+  {
+    id: "AS2-U12-SA-03",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Direction",
+    question: "Town P is in which direction of town T?\nI. Town T is south of town K, and town P is east of town K.\nII. Town P is north of town V, and town V is south of town T.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "A",
+    solution: "From Statement I, if T is south of K and P is east of K, then P is north-east of T. Statement II is not sufficient because P may be below, equal to, or above T depending on distance.",
+    shortcut: "Use coordinates: North = +y, South = -y, East = +x, West = -x."
+  },
+  {
+    id: "AS2-U12-SA-04",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Coding Decoding",
+    question: "How is the word 'never' written in a code language?\nI. 'never ever go there' is written as 'na ja ni ho'.\nII. 'go there and come back' is written as 'ma ho sa ni da'.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "D",
+    solution: "Common words in both statements are 'go' and 'there', and common codes are 'ni' and 'ho'. So 'never' and 'ever' are 'na' and 'ja', but we cannot decide exactly which code is for 'never'.",
+    shortcut: "In coding DS, common words give common codes, but exact matching must be unique."
+  },
+  {
+    id: "AS2-U12-SA-05",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Coding Decoding",
+    question: "How is PRODUCT written in the code language?\nI. AIEEE is written as BJFFF.\nII. CLOCK is written as DMPDL.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "C",
+    solution: "In Statement I, every letter is shifted by +1. In Statement II also, every letter is shifted by +1. So PRODUCT becomes QSPEVDU. Either statement alone is enough to identify the rule.",
+    shortcut: "Letter coding shortcut: check fixed shift first."
+  },
+  {
+    id: "AS2-U12-SA-06",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Row Position",
+    question: "What is Monica’s position with respect to Rahul?\nI. In a row of 25 students, Monica is 12th from the right and Rahul is 20th from the left.\nII. Monica is 4th from the right and Rahul is 8th from the left.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "A",
+    solution: "From Statement I, Monica's position from left = 25 - 12 + 1 = 14. Rahul is 20th from left. So Monica is 6 places to the left of Rahul. Statement II lacks the total number of students.",
+    shortcut: "Position from left = Total - position from right + 1."
+  },
+  {
+    id: "AS2-U12-SA-07",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Linear Arrangement",
+    question: "Five people A, B, C, D and E are seated in a straight line facing north. Who sits exactly in the middle?\nI. A sits at the extreme left end and B sits immediately to the right of A.\nII. C sits immediately to the right of B and D sits immediately to the right of C.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "Statement I gives A and B only. Statement II gives B-C-D sequence only. Combining both gives A-B-C-D-E, so C sits in the middle.",
+    shortcut: "For seating DS, build the arrangement only as much as needed."
+  },
+  {
+    id: "AS2-U12-SA-08",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Circular Arrangement",
+    question: "Six people P, Q, R, S, T and U sit around a circular table facing the centre. Who sits opposite P?\nI. Q sits immediately right of P and R sits immediately left of P.\nII. S sits opposite Q and T sits opposite R.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "Statement I fixes Q and R beside P but not the opposite person. Statement II gives opposite pairs for Q and R. Together, S is opposite Q and T is opposite R, so the remaining person U must be opposite P.",
+    shortcut: "In circular puzzles, opposite pairs help fix remaining positions quickly."
+  },
+  {
+    id: "AS2-U12-SA-09",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Floor Puzzle",
+    question: "In a six-floor building numbered 1 to 6 from bottom to top, on which floor does T live?\nI. T lives immediately above Q, and Q lives on floor 1.\nII. S lives on floor 6 and R lives on floor 4.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "A",
+    solution: "Statement I directly fixes Q on floor 1 and T immediately above Q, so T lives on floor 2. Statement II gives no information about T.",
+    shortcut: "Immediate above means floor number + 1."
+  },
+  {
+    id: "AS2-U12-SA-10",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Data Sufficiency - Blood Relation",
+    question: "Is S the mother of M?\nI. M is sister of Q, Q is sister of R, and R is daughter of S.\nII. S is the wife of L.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "Statement I shows M, Q and R are siblings, and R is child of S. But S could be father or mother. Statement II confirms S is female. Together, S is the mother of M.",
+    shortcut: "Blood relation DS needs both relation and gender confirmation."
+  },
+  {
+    id: "AS2-U12-SA-11",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Coding Inequality",
+    question: "In the following code: P $ Q means P ≥ Q, P @ Q means P > Q, P # Q means P < Q, P & Q means P = Q, P * Q means P ≤ Q.\nStatements: A $ B, B @ C\nConclusions:\nI. A # C\nII. A @ C",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "B",
+    solution: "A ≥ B and B > C. Therefore, A > C. So conclusion II follows and conclusion I does not follow.",
+    shortcut: "If A ≥ B and B > C, then A > C."
+  },
+  {
+    id: "AS2-U12-SA-12",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Coding Inequality",
+    question: "In the following code: P $ Q means P ≥ Q, P @ Q means P > Q, P # Q means P < Q, P & Q means P = Q, P * Q means P ≤ Q.\nStatements: X * Y, Y # Z\nConclusions:\nI. X # Z\nII. Z @ X",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "C",
+    solution: "X ≤ Y and Y < Z. Therefore, X < Z. Hence X # Z is true and Z @ X is also true.",
+    shortcut: "If X ≤ Y < Z, then X < Z and Z > X."
+  },
+  {
+    id: "AS2-U12-SA-13",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Coding Inequality",
+    question: "In the following code: P $ Q means P ≥ Q, P @ Q means P > Q, P # Q means P < Q, P & Q means P = Q, P * Q means P ≤ Q.\nStatements: M & N, N $ P\nConclusions:\nI. M $ P\nII. P @ M",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "A",
+    solution: "M = N and N ≥ P. Therefore, M ≥ P. So conclusion I follows. P > M is not definite.",
+    shortcut: "Equal signs can be replaced directly in inequality chains."
+  },
+  {
+    id: "AS2-U12-SA-14",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Coding Inequality",
+    question: "In the following code: P $ Q means P ≥ Q, P @ Q means P > Q, P # Q means P < Q, P & Q means P = Q, P * Q means P ≤ Q.\nStatements: R @ S, S $ T\nConclusions:\nI. R @ T\nII. T # R",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "C",
+    solution: "R > S and S ≥ T. Therefore, R > T. So both R @ T and T # R are true.",
+    shortcut: "A strict greater sign in a valid chain usually gives strict final relation."
+  },
+  {
+    id: "AS2-U12-SA-15",
+    unit: 12,
+    category: "Self-Assessment Based",
+    topic: "Coding Inequality",
+    question: "In the following code: P $ Q means P ≥ Q, P @ Q means P > Q, P # Q means P < Q, P & Q means P = Q, P * Q means P ≤ Q.\nStatements: A * B, B * C\nConclusions:\nI. A # C\nII. C $ A",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "B",
+    solution: "A ≤ B and B ≤ C, so A ≤ C. Therefore, C ≥ A is definitely true. But A < C is not definite because A may equal C.",
+    shortcut: "≤ chain gives ≤, not always <."
+  },
+
+  // =========================
+  // 20 Concept MCQs
+  // =========================
+
+  {
+    id: "AS2-U12-C-16",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Data Sufficiency Basics",
+    question: "Data Sufficiency questions mainly test whether:",
+    options: {
+      A: "The final answer is always numerical",
+      B: "The given data is enough to answer the question",
+      C: "The answer is always yes",
+      D: "The question has no solution"
+    },
+    answer: "B",
+    solution: "Data Sufficiency checks whether the given statements provide enough information to answer the question.",
+    shortcut: "DS = enough data or not enough data."
+  },
+  {
+    id: "AS2-U12-C-17",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Data Sufficiency Approach",
+    question: "In Data Sufficiency, the best approach is to:",
+    options: {
+      A: "Always solve the full question first",
+      B: "Check each statement separately first",
+      C: "Ignore the question stem",
+      D: "Use only the longer statement"
+    },
+    answer: "B",
+    solution: "In Data Sufficiency, check Statement I alone, then Statement II alone, and combine only if needed.",
+    shortcut: "I alone → II alone → both together."
+  },
+  {
+    id: "AS2-U12-C-18",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Data Sufficiency Options",
+    question: "In the common Data Sufficiency option pattern, answer A means:",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Both statements are not sufficient",
+      D: "Both statements are necessary"
+    },
+    answer: "A",
+    solution: "Answer A is chosen when Statement I alone is sufficient and Statement II alone is not sufficient.",
+    shortcut: "A = I alone."
+  },
+  {
+    id: "AS2-U12-C-19",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Data Sufficiency Options",
+    question: "In the common Data Sufficiency option pattern, answer E means:",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either statement alone is sufficient",
+      D: "Both statements together are necessary"
+    },
+    answer: "D",
+    solution: "Answer E is selected when neither statement alone is sufficient, but both statements together are sufficient.",
+    shortcut: "E = both together needed."
+  },
+  {
+    id: "AS2-U12-C-20",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Data Sufficiency Options",
+    question: "If Statement I alone and Statement II alone are each sufficient independently, the correct DS answer is:",
+    options: {
+      A: "A",
+      B: "B",
+      C: "C",
+      D: "D"
+    },
+    answer: "C",
+    solution: "When either statement alone is sufficient, the answer is C.",
+    shortcut: "C = either alone."
+  },
+  {
+    id: "AS2-U12-C-21",
+    unit: 12,
+    category: "Yes/No Data Sufficiency",
+    question: "For a Yes/No type Data Sufficiency question, a statement is sufficient when it gives:",
+    options: {
+      A: "Only YES as answer",
+      B: "Only NO as answer",
+      C: "A definite YES or a definite NO",
+      D: "Both YES and NO"
+    },
+    answer: "C",
+    solution: "A statement is sufficient if it gives a definite answer, whether that answer is YES or NO.",
+    shortcut: "Definite yes/no = sufficient."
+  },
+  {
+    id: "AS2-U12-C-22",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Blood Relation",
+    question: "Blood Relation Data Sufficiency mainly deals with:",
+    options: {
+      A: "Family relationships",
+      B: "Calendar dates",
+      C: "Clock angles",
+      D: "Interest rates"
+    },
+    answer: "A",
+    solution: "Blood relation questions ask about family links such as father, mother, brother, sister, son, daughter, etc.",
+    shortcut: "Blood relation = family tree."
+  },
+  {
+    id: "AS2-U12-C-23",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Order and Ranking",
+    question: "Order and Ranking Data Sufficiency questions usually require:",
+    options: {
+      A: "Finding direction",
+      B: "Finding exact position or rank",
+      C: "Finding coded words",
+      D: "Finding compound interest"
+    },
+    answer: "B",
+    solution: "Order and ranking questions ask for position, rank, highest, lowest, middle, or relative order.",
+    shortcut: "Ranking DS = exact rank/person must be fixed."
+  },
+  {
+    id: "AS2-U12-C-24",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Direction and Distance",
+    question: "In direction-based DS questions, the most useful method is:",
+    options: {
+      A: "Draw a direction diagram",
+      B: "Memorize all names",
+      C: "Ignore distances",
+      D: "Use alphabet positions"
+    },
+    answer: "A",
+    solution: "A direction diagram or coordinate method helps identify the final direction clearly.",
+    shortcut: "Use N-S-E-W arrows or coordinates."
+  },
+  {
+    id: "AS2-U12-C-25",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Coding Decoding",
+    question: "In Coding-Decoding DS, the main goal is to find:",
+    options: {
+      A: "The exact coding rule",
+      B: "The tallest person",
+      C: "The oldest person",
+      D: "The clock angle"
+    },
+    answer: "A",
+    solution: "Coding-decoding questions require identifying the rule used to convert words, letters, or numbers into code.",
+    shortcut: "Check shift, reverse, substitution, and common-word patterns."
+  },
+  {
+    id: "AS2-U12-C-26",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Seating Arrangement",
+    question: "Linear and Circular Arrangement are types of:",
+    options: {
+      A: "Coding Inequality",
+      B: "Seating Arrangement",
+      C: "Simple Interest",
+      D: "Calendar"
+    },
+    answer: "B",
+    solution: "Seating arrangement questions may be linear, circular, square, or rectangular depending on how people are arranged.",
+    shortcut: "Linear = row; circular = round table."
+  },
+  {
+    id: "AS2-U12-C-27",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Floor Puzzle",
+    question: "In floor puzzle questions, the ground floor is usually numbered as:",
+    options: {
+      A: "0",
+      B: "1",
+      C: "5",
+      D: "10"
+    },
+    answer: "B",
+    solution: "In most floor puzzle questions, the ground floor is numbered 1, and floors increase upward.",
+    shortcut: "Ground floor = 1 unless stated otherwise."
+  },
+  {
+    id: "AS2-U12-C-28",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Scheduling",
+    question: "Scheduling Data Sufficiency questions are usually based on:",
+    options: {
+      A: "Months, dates, days, or years",
+      B: "Blood groups only",
+      C: "Clock hands only",
+      D: "Profit and loss only"
+    },
+    answer: "A",
+    solution: "Scheduling questions involve events arranged according to days, dates, months, or years.",
+    shortcut: "Scheduling = time order of events."
+  },
+  {
+    id: "AS2-U12-C-29",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Coding Inequality Symbols",
+    question: "If P $ Q means P is not smaller than Q, then P $ Q means:",
+    options: {
+      A: "P < Q",
+      B: "P ≤ Q",
+      C: "P ≥ Q",
+      D: "P ≠ Q"
+    },
+    answer: "C",
+    solution: "Not smaller than means greater than or equal to. Therefore, P $ Q means P ≥ Q.",
+    shortcut: "Not smaller than = ≥."
+  },
+  {
+    id: "AS2-U12-C-30",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Coding Inequality Symbols",
+    question: "If P @ Q means P is neither smaller than nor equal to Q, then P @ Q means:",
+    options: {
+      A: "P > Q",
+      B: "P < Q",
+      C: "P = Q",
+      D: "P ≤ Q"
+    },
+    answer: "A",
+    solution: "Neither smaller nor equal means P is only greater than Q.",
+    shortcut: "Not smaller and not equal = >."
+  },
+  {
+    id: "AS2-U12-C-31",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Coding Inequality Symbols",
+    question: "If P # Q means P is neither greater than nor equal to Q, then P # Q means:",
+    options: {
+      A: "P > Q",
+      B: "P < Q",
+      C: "P ≥ Q",
+      D: "P = Q"
+    },
+    answer: "B",
+    solution: "Neither greater nor equal means P is only smaller than Q.",
+    shortcut: "Not greater and not equal = <."
+  },
+  {
+    id: "AS2-U12-C-32",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Coding Inequality Symbols",
+    question: "If P & Q means P is neither greater than nor smaller than Q, then P & Q means:",
+    options: {
+      A: "P > Q",
+      B: "P < Q",
+      C: "P = Q",
+      D: "P ≠ Q"
+    },
+    answer: "C",
+    solution: "If P is neither greater nor smaller than Q, then P must be equal to Q.",
+    shortcut: "Neither greater nor smaller = equal."
+  },
+  {
+    id: "AS2-U12-C-33",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Coding Inequality Symbols",
+    question: "If P * Q means P is not greater than Q, then P * Q means:",
+    options: {
+      A: "P ≤ Q",
+      B: "P ≥ Q",
+      C: "P > Q",
+      D: "P ≠ Q"
+    },
+    answer: "A",
+    solution: "Not greater than means less than or equal to. Therefore, P * Q means P ≤ Q.",
+    shortcut: "Not greater than = ≤."
+  },
+  {
+    id: "AS2-U12-C-34",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Inequality Chain",
+    question: "If A > B and B > C, then:",
+    options: {
+      A: "A < C",
+      B: "A = C",
+      C: "A > C",
+      D: "No relation"
+    },
+    answer: "C",
+    solution: "A is greater than B, and B is greater than C. Therefore, A is greater than C.",
+    shortcut: "> + > gives >."
+  },
+  {
+    id: "AS2-U12-C-35",
+    unit: 12,
+    category: "Concept MCQ",
+    topic: "Inequality Chain",
+    question: "If A ≥ B and B ≥ A, then:",
+    options: {
+      A: "A > B",
+      B: "A < B",
+      C: "A = B",
+      D: "A ≠ B"
+    },
+    answer: "C",
+    solution: "A ≥ B and B ≥ A can both be true only when A = B.",
+    shortcut: "Opposite ≥ conditions together mean equality."
+  },
+
+  // =========================
+  // 10 Tricky Exam MCQs
+  // =========================
+
+  {
+    id: "AS2-U12-T-36",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Ranking",
+    question: "Who has secured the least marks among P, Q, R, S and T?\nI. S has secured less marks than only R and T.\nII. Q secured more marks than P.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "Statement I tells that R and T are above S, while P and Q are below S. But least among P and Q is unknown. Statement II says Q > P. Therefore, P has the least marks.",
+    shortcut: "Ranking trick: convert sentences into order chain."
+  },
+  {
+    id: "AS2-U12-T-37",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Floor Puzzle",
+    question: "On which floor is Shikha residing in a six-floor building?\nI. Shikha likes to reside only on even-numbered floors.\nII. Reema is two floors below Peter, and Peter is three floors above Shikha.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "Statement I gives possible floors 2, 4, or 6. Statement II gives Peter = Shikha + 3 and Reema = Peter - 2 = Shikha + 1, so Shikha can be on 1, 2, or 3. Combining with even-number condition, Shikha must be on floor 2.",
+    shortcut: "Use floor numbers as variables."
+  },
+  {
+    id: "AS2-U12-T-38",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Scheduling",
+    question: "If the present month is August, in which month is Meena’s birthday?\nI. Shikha remembers that Meena’s birthday was 4 months ago.\nII. Raj remembers that after 2 months from now, Meena’s birthday will be 6 months back.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "C",
+    solution: "Statement I: 4 months before August is April. Statement II: after 2 months it will be October, and 6 months before October is April. Either statement alone gives April.",
+    shortcut: "Scheduling shortcut: move forward/backward month by month."
+  },
+  {
+    id: "AS2-U12-T-39",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Colour Coding",
+    question: "What is the colour of white snow in the given colour code?\nI. Green is called Black, Black is called Blue, and Blue is called Red.\nII. Red is called White and White is called Orange.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "B",
+    solution: "Snow is actually white. Statement II says white is called orange. Therefore, the colour of white snow in the code is orange. Statement I is not needed.",
+    shortcut: "Colour code questions ask the coded name of the real colour."
+  },
+  {
+    id: "AS2-U12-T-40",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Age Ranking",
+    question: "Who is oldest among Peter, Kevin, Joseph and Jason?\nI. Jason is older than Peter and Joseph.\nII. Kevin is younger than Joseph.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "Statement I shows Jason is older than Peter and Joseph, but Kevin is unknown. Statement II says Kevin is younger than Joseph. Combining, Jason is older than Joseph, Joseph is older than Kevin, and Jason is older than Peter. So Jason is oldest.",
+    shortcut: "To find oldest, every other person must be proved younger."
+  },
+  {
+    id: "AS2-U12-T-41",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Coding Inequality - Either Or",
+    question: "Statements: A ≥ B\nConclusions:\nI. A > B\nII. A = B",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "E",
+    solution: "A ≥ B means either A > B or A = B. Both cannot be true together, but one of them must be true.",
+    shortcut: "≥ splits into > or =."
+  },
+  {
+    id: "AS2-U12-T-42",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Coding Inequality",
+    question: "Statements: M > N, N ≤ P, P = Q\nConclusions:\nI. Q > N\nII. M > P",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "D",
+    solution: "N ≤ P and P = Q gives Q ≥ N, not definitely Q > N. Also M > N but P may be greater than, equal to, or less than M. So M > P is not definite.",
+    shortcut: "Do not convert ≥ into > unless strict relation is guaranteed."
+  },
+  {
+    id: "AS2-U12-T-43",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Coding Decoding",
+    question: "How is 'sky' coded?\nI. 'sky is blue' is coded as 'pa la ro' and 'blue and bright' is coded as 'ro ki na'.\nII. 'sky looks bright' is coded as 'pa da ki'.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "E",
+    solution: "From Statement I, 'blue' = 'ro', but 'sky' is not fixed. Statement II alone also does not fix 'sky'. Combining both, 'bright' = 'ki' and the common code linked to 'sky' is 'pa'.",
+    shortcut: "Use repeated words across statements to eliminate extra codes."
+  },
+  {
+    id: "AS2-U12-T-44",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Coding Inequality",
+    question: "Statements: A < B, B = C, C ≤ D\nConclusions:\nI. A < D\nII. D > A",
+    options: {
+      A: "Only conclusion I follows",
+      B: "Only conclusion II follows",
+      C: "Both I and II follow",
+      D: "Neither I nor II follows",
+      E: "Either I or II follows"
+    },
+    answer: "C",
+    solution: "A < B and B = C gives A < C. Since C ≤ D, D is greater than or equal to C. Therefore, A < D and D > A are both true.",
+    shortcut: "< followed by = and ≤ still gives final <."
+  },
+  {
+    id: "AS2-U12-T-45",
+    unit: 12,
+    category: "Tricky Exam MCQ",
+    topic: "Data Sufficiency - Floor Puzzle",
+    question: "Five people A, B, C, D and E live on different floors numbered 1 to 5 from bottom to top. Who lives on the top floor?\nI. A lives below C and C lives below E.\nII. E lives on floor 5.",
+    options: {
+      A: "Statement I alone is sufficient",
+      B: "Statement II alone is sufficient",
+      C: "Either Statement I alone or Statement II alone is sufficient",
+      D: "Both statements together are not sufficient",
+      E: "Both statements together are necessary"
+    },
+    answer: "B",
+    solution: "Statement I only tells A < C < E, but E may or may not be on the top floor. Statement II directly says E lives on floor 5, so E is on the top floor.",
+    shortcut: "Top floor in floor puzzle = highest floor number."
+  }
+];
