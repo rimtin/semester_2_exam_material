@@ -13,7 +13,7 @@ window.SUBJECTS = [
     icon: "☁️",
     description: "Cloud models, services, virtualization, big data, security and collaboration tools.",
     unitCount: 14,
-    stats: "14 units · 630 MCQs",
+    stats: "14 units",
     path: "subjects/cloud/units/",
   },
 
@@ -24,7 +24,7 @@ window.SUBJECTS = [
     description: "Reasoning, problem solving, and analytical ability practice for the exam.",
     unitCount: 14,
     stats: "14 units",
-    path: "subjects/analytical/units",
+    path: "subjects/analytical/units/",
   },
 
   // Example — uncomment and create the files to add your DWDM subject:
