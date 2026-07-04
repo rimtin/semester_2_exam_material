@@ -1,0 +1,560 @@
+// unit8_mcq.js
+// Analytical Skills-II
+// Unit 8: Simple Interest
+// 15 Self-Assessment Based + 20 Concept MCQs + 10 Tricky Exam MCQs
+
+const analyticalUnit8MCQs = [
+  // =========================
+  // 15 SELF-ASSESSMENT BASED
+  // =========================
+  {
+    id: "AS-U8-SA-01",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Simple Interest",
+    question: "The simple interest on ₹500 at 6% per annum from May 3rd to July 15th in the same year is:",
+    options: ["₹9", "₹6", "₹4", "₹5"],
+    answer: "B",
+    correctAnswer: "₹6",
+    solution: "Time from May 3 to July 15 = 73 days. SI = (P × R × T) / 100 = (500 × 6 × 73) / (100 × 365) = ₹6.",
+    shortcut: "For days: SI = P × R × Days / (100 × 365)."
+  },
+  {
+    id: "AS-U8-SA-02",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Simple Interest Computation",
+    question: "What simple interest is obtained on ₹5760 at 6% per annum after 3 years?",
+    options: ["₹1036.80", "₹1063.80", "₹1336.80", "₹1666.80"],
+    answer: "A",
+    correctAnswer: "₹1036.80",
+    solution: "SI = (5760 × 6 × 3) / 100 = ₹1036.80.",
+    shortcut: "SI = PRT / 100."
+  },
+  {
+    id: "AS-U8-SA-03",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Amount Computation",
+    question: "A man borrowed ₹10000 for 6 years at 8% simple interest per annum. What amount must he return?",
+    options: ["₹14800", "₹12600", "₹13300", "₹12040"],
+    answer: "A",
+    correctAnswer: "₹14800",
+    solution: "SI = (10000 × 8 × 6) / 100 = ₹4800. Amount = Principal + SI = 10000 + 4800 = ₹14800.",
+    shortcut: "Amount = P + SI."
+  },
+  {
+    id: "AS-U8-SA-04",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Amount Settlement",
+    question: "A farmer borrowed ₹3600 at 15% simple interest per annum. At the end of 4 years, he cleared the account by paying ₹4000 and a cow. Find the cost of the cow.",
+    options: ["₹1000", "₹1200", "₹1550", "₹1760"],
+    answer: "D",
+    correctAnswer: "₹1760",
+    solution: "SI = (3600 × 15 × 4) / 100 = ₹2160. Total amount = 3600 + 2160 = ₹5760. Cost of cow = 5760 - 4000 = ₹1760.",
+    shortcut: "Cost of object = Total amount due - cash paid."
+  },
+  {
+    id: "AS-U8-SA-05",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Principal Computation",
+    question: "Find the principal that will yield ₹60 as simple interest at 6% per annum in 5 years.",
+    options: ["₹175", "₹350", "₹200", "₹259"],
+    answer: "C",
+    correctAnswer: "₹200",
+    solution: "P = (SI × 100) / (R × T) = (60 × 100) / (6 × 5) = ₹200.",
+    shortcut: "Principal = SI × 100 / RT."
+  },
+  {
+    id: "AS-U8-SA-06",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Amount Computation",
+    question: "X borrows ₹520 from Y at 13% simple interest per annum. What amount should X pay after 6 months?",
+    options: ["₹353.80", "₹453.80", "₹552.80", "₹553.80"],
+    answer: "D",
+    correctAnswer: "₹553.80",
+    solution: "Time = 6 months = 1/2 year. SI = (520 × 13 × 1/2) / 100 = ₹33.80. Amount = 520 + 33.80 = ₹553.80.",
+    shortcut: "6 months = 1/2 year."
+  },
+  {
+    id: "AS-U8-SA-07",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Principal Computation",
+    question: "Find the sum of money that will produce ₹1770 interest in 5 years at 12% simple interest per annum.",
+    options: ["₹2950", "₹3120", "₹2800", "₹1359"],
+    answer: "A",
+    correctAnswer: "₹2950",
+    solution: "P = (SI × 100) / (R × T) = (1770 × 100) / (12 × 5) = ₹2950.",
+    shortcut: "Use P = 100SI / RT."
+  },
+  {
+    id: "AS-U8-SA-08",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Principal Computation",
+    question: "A sum fetched a total simple interest of ₹4016.25 at 9% per annum in 5 years. Find the sum.",
+    options: ["₹4462.50", "₹8032.50", "₹8900", "₹8925"],
+    answer: "D",
+    correctAnswer: "₹8925",
+    solution: "P = (4016.25 × 100) / (9 × 5) = 401625 / 45 = ₹8925.",
+    shortcut: "When SI, rate and time are given, directly use P = 100SI / RT."
+  },
+  {
+    id: "AS-U8-SA-09",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Rate Computation",
+    question: "If the simple interest on a certain sum after 6 years is 9/25 of the principal, then the rate of interest per annum is:",
+    options: ["5%", "6%", "4%", "7%"],
+    answer: "B",
+    correctAnswer: "6%",
+    solution: "SI = 9P/25. Rate = (SI × 100) / (P × T) = [(9P/25) × 100] / (P × 6) = 36/6 = 6%.",
+    shortcut: "If SI is a fraction of P, cancel P directly."
+  },
+  {
+    id: "AS-U8-SA-10",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Time Computation",
+    question: "In 4 years, ₹6000 amounts to ₹8000. In what time at the same rate will ₹525 amount to ₹700?",
+    options: ["2 years", "3 years", "4 years", "5 years"],
+    answer: "C",
+    correctAnswer: "4 years",
+    solution: "For ₹6000, SI = 8000 - 6000 = ₹2000. Rate = (2000 × 100)/(6000 × 4) = 25/3%. For ₹525, SI = 700 - 525 = ₹175. Time = (175 × 100)/(525 × 25/3) = 4 years.",
+    shortcut: "First find rate, then use T = 100SI / PR."
+  },
+  {
+    id: "AS-U8-SA-11",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Money Trebling",
+    question: "In how many years will a sum of money treble itself at 10% per annum simple interest?",
+    options: ["15 years", "19 years", "20 years", "12 years"],
+    answer: "C",
+    correctAnswer: "20 years",
+    solution: "To treble, amount = 3P, so SI = 2P. Time = (2P × 100)/(P × 10) = 20 years.",
+    shortcut: "To treble, interest must be 200% of principal."
+  },
+  {
+    id: "AS-U8-SA-12",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Amount Computation",
+    question: "₹6200 amounts to ₹9176 in 4 years at simple interest. If the interest rate is increased by 3%, what will be the new amount?",
+    options: ["₹8432", "₹9820", "₹9920", "₹10920"],
+    answer: "C",
+    correctAnswer: "₹9920",
+    solution: "Original SI = 9176 - 6200 = ₹2976. Original rate = (2976 × 100)/(6200 × 4) = 12%. New rate = 15%. New SI = (6200 × 15 × 4)/100 = ₹3720. New amount = 6200 + 3720 = ₹9920.",
+    shortcut: "Find old rate first, then add the increased rate."
+  },
+  {
+    id: "AS-U8-SA-13",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Money Trebling",
+    question: "A sum of money doubles itself in 8 years. In how many years will it treble itself at the same simple interest rate?",
+    options: ["16 years", "15 years", "14 years", "21 years"],
+    answer: "A",
+    correctAnswer: "16 years",
+    solution: "If money doubles in 8 years, SI = P in 8 years. To treble, SI must be 2P. Therefore time = 2 × 8 = 16 years.",
+    shortcut: "At simple interest, interest is directly proportional to time."
+  },
+  {
+    id: "AS-U8-SA-14",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Principal Computation",
+    question: "A sum was put at simple interest for 4 years. If it had been put at 2% higher rate, it would have fetched ₹56 more. Find the sum.",
+    options: ["₹680", "₹700", "₹720", "₹530"],
+    answer: "B",
+    correctAnswer: "₹700",
+    solution: "Extra interest = (P × extra rate × time)/100. So 56 = (P × 2 × 4)/100. Therefore P = ₹700.",
+    shortcut: "Extra SI = P × rate difference × time / 100."
+  },
+  {
+    id: "AS-U8-SA-15",
+    unit: 8,
+    category: "Self-Assessment Based",
+    topic: "Extra Interest",
+    question: "A principal of ₹1750 is invested for 7 years. If the rate of interest is increased by 2%, how much extra simple interest will be earned?",
+    options: ["₹35", "₹245", "₹350", "Cannot be determined"],
+    answer: "B",
+    correctAnswer: "₹245",
+    solution: "Extra SI = (1750 × 2 × 7)/100 = ₹245.",
+    shortcut: "Extra interest depends only on principal, extra rate and time."
+  },
+
+  // =================
+  // 20 CONCEPT MCQs
+  // =================
+  {
+    id: "AS-U8-C-16",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Simple Interest",
+    question: "Find the simple interest on ₹8000 at 5% per annum for 2 years.",
+    options: ["₹600", "₹700", "₹800", "₹900"],
+    answer: "C",
+    correctAnswer: "₹800",
+    solution: "SI = (8000 × 5 × 2)/100 = ₹800.",
+    shortcut: "SI = PRT/100."
+  },
+  {
+    id: "AS-U8-C-17",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Amount",
+    question: "Find the amount on ₹2500 at 8% simple interest per annum for 3 years.",
+    options: ["₹3000", "₹3100", "₹3200", "₹3300"],
+    answer: "B",
+    correctAnswer: "₹3100",
+    solution: "SI = (2500 × 8 × 3)/100 = ₹600. Amount = 2500 + 600 = ₹3100.",
+    shortcut: "Amount = P + PRT/100."
+  },
+  {
+    id: "AS-U8-C-18",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Rate Computation",
+    question: "At what rate per annum will ₹10000 earn ₹1200 simple interest in 3 years?",
+    options: ["3%", "4%", "5%", "6%"],
+    answer: "B",
+    correctAnswer: "4%",
+    solution: "Rate = (SI × 100)/(P × T) = (1200 × 100)/(10000 × 3) = 4%.",
+    shortcut: "R = 100SI / PT."
+  },
+  {
+    id: "AS-U8-C-19",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Time Computation",
+    question: "In how many years will ₹3000 earn ₹450 simple interest at 5% per annum?",
+    options: ["2 years", "3 years", "4 years", "5 years"],
+    answer: "B",
+    correctAnswer: "3 years",
+    solution: "Time = (SI × 100)/(P × R) = (450 × 100)/(3000 × 5) = 3 years.",
+    shortcut: "T = 100SI / PR."
+  },
+  {
+    id: "AS-U8-C-20",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Present Worth",
+    question: "A sum amounts to ₹5750 in 3 years at 5% simple interest. Find the principal.",
+    options: ["₹4800", "₹5000", "₹5200", "₹5500"],
+    answer: "B",
+    correctAnswer: "₹5000",
+    solution: "Amount = P(1 + RT/100). So 5750 = P(1 + 15/100) = 1.15P. Therefore P = 5750/1.15 = ₹5000.",
+    shortcut: "P = Amount / (1 + RT/100)."
+  },
+  {
+    id: "AS-U8-C-21",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Doubling",
+    question: "A sum doubles itself in 10 years at simple interest. Find the rate of interest.",
+    options: ["8%", "9%", "10%", "12%"],
+    answer: "C",
+    correctAnswer: "10%",
+    solution: "If a sum doubles, SI = P. So P = (P × R × 10)/100. Hence R = 10%.",
+    shortcut: "If money doubles in T years, rate = 100/T."
+  },
+  {
+    id: "AS-U8-C-22",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Same Interest",
+    question: "The interest on ₹6000 at 8% per annum for 2 years is equal to the interest on ₹8000 for 3 years. Find the second rate.",
+    options: ["3%", "4%", "5%", "6%"],
+    answer: "B",
+    correctAnswer: "4%",
+    solution: "First SI = (6000 × 8 × 2)/100 = ₹960. For second case: 960 = (8000 × R × 3)/100. So R = 4%.",
+    shortcut: "When interests are equal, equate PRT values."
+  },
+  {
+    id: "AS-U8-C-23",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Interest Ratio",
+    question: "For the same principal, find the ratio of simple interest at 5% for 4 years and 8% for 3 years.",
+    options: ["5:6", "6:5", "4:5", "3:4"],
+    answer: "A",
+    correctAnswer: "5:6",
+    solution: "For same principal, SI ratio = R1T1 : R2T2 = 5×4 : 8×3 = 20:24 = 5:6.",
+    shortcut: "If principal is same, SI ratio = RT ratio."
+  },
+  {
+    id: "AS-U8-C-24",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Effect of Principal",
+    question: "If principal is doubled while rate and time remain the same, what happens to simple interest?",
+    options: ["It becomes half", "It remains same", "It doubles", "It triples"],
+    answer: "C",
+    correctAnswer: "It doubles",
+    solution: "SI = PRT/100. Since SI is directly proportional to P, doubling P doubles SI.",
+    shortcut: "SI is directly proportional to principal."
+  },
+  {
+    id: "AS-U8-C-25",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Months",
+    question: "Find the amount on ₹4000 at 6% per annum for 9 months.",
+    options: ["₹4160", "₹4180", "₹4200", "₹4240"],
+    answer: "B",
+    correctAnswer: "₹4180",
+    solution: "Time = 9/12 = 3/4 year. SI = (4000 × 6 × 3/4)/100 = ₹180. Amount = 4000 + 180 = ₹4180.",
+    shortcut: "Convert months into years: months/12."
+  },
+  {
+    id: "AS-U8-C-26",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Months",
+    question: "A person borrows ₹10000 at 12% per annum simple interest. How much should he pay after 8 months?",
+    options: ["₹10600", "₹10800", "₹11000", "₹11200"],
+    answer: "B",
+    correctAnswer: "₹10800",
+    solution: "Time = 8/12 = 2/3 year. SI = (10000 × 12 × 2/3)/100 = ₹800. Amount = ₹10800.",
+    shortcut: "8 months = 2/3 year."
+  },
+  {
+    id: "AS-U8-C-27",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Time Computation",
+    question: "₹6000 amounts to ₹7200 at 5% simple interest per annum. Find the time.",
+    options: ["3 years", "4 years", "5 years", "6 years"],
+    answer: "B",
+    correctAnswer: "4 years",
+    solution: "SI = 7200 - 6000 = ₹1200. Time = (1200 × 100)/(6000 × 5) = 4 years.",
+    shortcut: "First find SI = Amount - Principal."
+  },
+  {
+    id: "AS-U8-C-28",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Interest Difference",
+    question: "Find the difference between the simple interest on ₹5000 and ₹3000 at 10% per annum for 2 years.",
+    options: ["₹300", "₹400", "₹500", "₹600"],
+    answer: "B",
+    correctAnswer: "₹400",
+    solution: "Difference in principal = ₹2000. Difference in SI = (2000 × 10 × 2)/100 = ₹400.",
+    shortcut: "Difference in SI = Difference in principal × R × T / 100."
+  },
+  {
+    id: "AS-U8-C-29",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Average Rate",
+    question: "Rahul invests ₹3000 at 5% per annum and ₹2000 at 8% per annum. Find the average rate on the total amount.",
+    options: ["5.8%", "6.0%", "6.2%", "6.5%"],
+    answer: "C",
+    correctAnswer: "6.2%",
+    solution: "Annual interest = 3000×5/100 + 2000×8/100 = 150 + 160 = ₹310. Total principal = ₹5000. Average rate = (310/5000)×100 = 6.2%.",
+    shortcut: "Average rate = total annual interest / total principal × 100."
+  },
+  {
+    id: "AS-U8-C-30",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Present Worth",
+    question: "Find the present worth of ₹132 due in 2 years at 5% simple interest per annum.",
+    options: ["₹100", "₹110", "₹120", "₹125"],
+    answer: "C",
+    correctAnswer: "₹120",
+    solution: "Amount = P(1 + RT/100). So 132 = P(1 + 10/100) = 1.1P. Hence P = 132/1.1 = ₹120.",
+    shortcut: "Present worth = Future amount / (1 + RT/100)."
+  },
+  {
+    id: "AS-U8-C-31",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Amount",
+    question: "A sum amounts to ₹1500 in 5 years at 10% simple interest. Find the principal.",
+    options: ["₹900", "₹1000", "₹1100", "₹1200"],
+    answer: "B",
+    correctAnswer: "₹1000",
+    solution: "Amount = P(1 + 10×5/100) = 1.5P. So 1500 = 1.5P and P = ₹1000.",
+    shortcut: "At 10% for 5 years, amount becomes 150% of principal."
+  },
+  {
+    id: "AS-U8-C-32",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Annual Income",
+    question: "Find the annual income from ₹4000 invested at 7% simple interest per annum.",
+    options: ["₹240", "₹260", "₹280", "₹300"],
+    answer: "C",
+    correctAnswer: "₹280",
+    solution: "Annual interest = (4000 × 7 × 1)/100 = ₹280.",
+    shortcut: "Annual income = P × R / 100."
+  },
+  {
+    id: "AS-U8-C-33",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Rate Computation",
+    question: "If simple interest is 1/5 of the principal in 4 years, find the rate per annum.",
+    options: ["4%", "5%", "6%", "8%"],
+    answer: "B",
+    correctAnswer: "5%",
+    solution: "SI = P/5. Rate = [(P/5) × 100]/(P × 4) = 100/20 = 5%.",
+    shortcut: "Cancel principal when SI is given as a fraction of principal."
+  },
+  {
+    id: "AS-U8-C-34",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Principal",
+    question: "What principal will earn ₹240 simple interest at 6% per annum in 2 years?",
+    options: ["₹1800", "₹2000", "₹2200", "₹2400"],
+    answer: "B",
+    correctAnswer: "₹2000",
+    solution: "P = (240 × 100)/(6 × 2) = ₹2000.",
+    shortcut: "P = 100SI / RT."
+  },
+  {
+    id: "AS-U8-C-35",
+    unit: 8,
+    category: "Concept MCQ",
+    topic: "Amount",
+    question: "At 15% simple interest for 2 years, a sum amounts to ₹2600. Find the principal.",
+    options: ["₹1800", "₹1900", "₹2000", "₹2100"],
+    answer: "C",
+    correctAnswer: "₹2000",
+    solution: "At 15% for 2 years, SI = 30% of principal. Amount = 130% of principal. So P = 2600 / 1.3 = ₹2000.",
+    shortcut: "Amount multiplier = 1 + RT/100."
+  },
+
+  // =====================
+  // 10 TRICKY EXAM MCQs
+  // =====================
+  {
+    id: "AS-U8-T-36",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Change in Principal",
+    question: "The simple interest on a sum of money is ₹600 after 10 years. If the principal is trebled after 5 years, what is the total interest at the end of 10 years?",
+    options: ["₹900", "₹1000", "₹1200", "₹1500"],
+    answer: "C",
+    correctAnswer: "₹1200",
+    solution: "Interest for 10 years on original principal = ₹600. So interest for first 5 years = ₹300. After 5 years, principal is trebled, so interest for next 5 years = 3 × 300 = ₹900. Total interest = 300 + 900 = ₹1200.",
+    shortcut: "At simple interest, interest is proportional to principal and time."
+  },
+  {
+    id: "AS-U8-T-37",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Principal and Time",
+    question: "A certain sum amounts to ₹450 at 7% per annum simple interest. The same sum amounts to ₹350 at 5% per annum for the same time. Find the sum and time.",
+    options: ["₹100, 50 years", "₹200, 25 years", "₹250, 10 years", "₹300, 8 years"],
+    answer: "A",
+    correctAnswer: "₹100, 50 years",
+    solution: "Let principal be P and time be T. P + 7PT/100 = 450 and P + 5PT/100 = 350. Subtracting gives 2PT/100 = 100, so PT = 5000. From second equation: P + 250 = 350, hence P = 100. Therefore T = 5000/100 = 50 years.",
+    shortcut: "Subtract two amount equations to remove principal."
+  },
+  {
+    id: "AS-U8-T-38",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Weighted Interest",
+    question: "Half of a sum is invested at 4%, one-fourth at 6%, and the rest at 8% simple interest. If the annual income is ₹550, find the original sum.",
+    options: ["₹8000", "₹9000", "₹10000", "₹12000"],
+    answer: "C",
+    correctAnswer: "₹10000",
+    solution: "Average rate = (1/2×4) + (1/4×6) + (1/4×8) = 2 + 1.5 + 2 = 5.5%. Annual income = 5.5% of sum = ₹550. So sum = 550×100/5.5 = ₹10000.",
+    shortcut: "Use weighted average rate."
+  },
+  {
+    id: "AS-U8-T-39",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Fraction of Principal",
+    question: "In how much time will the simple interest on a certain sum be 0.125 times the principal at 10% per annum?",
+    options: ["1 year", "1.25 years", "1.5 years", "2 years"],
+    answer: "B",
+    correctAnswer: "1.25 years",
+    solution: "SI = 0.125P. Time = (SI × 100)/(P × R) = (0.125P × 100)/(P × 10) = 1.25 years.",
+    shortcut: "0.125 = 1/8."
+  },
+  {
+    id: "AS-U8-T-40",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Same Interest Different Time",
+    question: "The simple interest on a sum at 5% per annum for 8 years is ₹840. At what rate can the same interest be received on the same sum after 5 years?",
+    options: ["6%", "7%", "8%", "9%"],
+    answer: "C",
+    correctAnswer: "8%",
+    solution: "For the same principal and same interest, R×T remains constant. So 5×8 = R×5. Therefore R = 8%.",
+    shortcut: "Same P and same SI: R1T1 = R2T2."
+  },
+  {
+    id: "AS-U8-T-41",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Rate Difference",
+    question: "If the simple interest on ₹1400 is more than the interest on ₹1000 by ₹60 in 5 years, find the rate per annum.",
+    options: ["2%", "3%", "4%", "5%"],
+    answer: "B",
+    correctAnswer: "3%",
+    solution: "Difference in principal = 1400 - 1000 = ₹400. Difference in interest = (400 × R × 5)/100 = 60. So 20R = 60 and R = 3%.",
+    shortcut: "Use only the difference in principals."
+  },
+  {
+    id: "AS-U8-T-42",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Trebling",
+    question: "A sum of money put out on simple interest doubles itself in 12 years. In how many years will it treble itself?",
+    options: ["18 years", "20 years", "24 years", "30 years"],
+    answer: "C",
+    correctAnswer: "24 years",
+    solution: "To double, SI = P in 12 years. To treble, SI = 2P. Since SI is proportional to time, required time = 2 × 12 = 24 years.",
+    shortcut: "Trebling takes twice the time of doubling under simple interest."
+  },
+  {
+    id: "AS-U8-T-43",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Average Rate",
+    question: "Rahul deposits ₹5000 at 2% per annum and ₹2000 at 4% per annum. Find the overall rate of interest for the whole sum.",
+    options: ["2.25%", "2.57%", "3%", "3.5%"],
+    answer: "B",
+    correctAnswer: "2.57%",
+    solution: "Annual interest = 5000×2/100 + 2000×4/100 = 100 + 80 = ₹180. Total sum = ₹7000. Overall rate = (180/7000)×100 = 18/7% = 2.57%.",
+    shortcut: "Overall rate = total annual interest / total investment × 100."
+  },
+  {
+    id: "AS-U8-T-44",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Rate Increase",
+    question: "A sum invested for 4 years gives ₹160 more interest when the rate is increased from 6% to 8%. Find the sum.",
+    options: ["₹1000", "₹1500", "₹2000", "₹2500"],
+    answer: "C",
+    correctAnswer: "₹2000",
+    solution: "Rate difference = 8% - 6% = 2%. Extra SI = (P × 2 × 4)/100 = 160. So P = ₹2000.",
+    shortcut: "Extra SI = P × difference in rate × time / 100."
+  },
+  {
+    id: "AS-U8-T-45",
+    unit: 8,
+    category: "Tricky Exam MCQ",
+    topic: "Changing Principal",
+    question: "A person lends ₹8000 at 5% simple interest. After 1 year, he takes back ₹3000. Find the total interest earned at the end of 3 years.",
+    options: ["₹800", "₹900", "₹1000", "₹1200"],
+    answer: "B",
+    correctAnswer: "₹900",
+    solution: "For first year, interest on ₹8000 = 8000×5×1/100 = ₹400. After withdrawing ₹3000, remaining principal = ₹5000. Interest for next 2 years = 5000×5×2/100 = ₹500. Total interest = 400 + 500 = ₹900.",
+    shortcut: "When principal changes, split the time period into parts."
+  }
+];
+
+window.analyticalUnit8MCQs = analyticalUnit8MCQs;
