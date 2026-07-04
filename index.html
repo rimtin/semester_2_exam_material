@@ -2,159 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Cloud Computing Quick Test</title>
+  <title>Exam Practice Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
   <div class="app-container">
     <header>
       <div class="header-top">
-        <div>
-          <h1>☁️ Cloud Computing Quick Test</h1>
-          <p class="subtitle">Unit-wise MCQs with an AI tutor, hints, weak-topic tracking, and a practice coach</p>
+        <div class="header-title">
+          <button id="btn-home" class="icon-btn hidden" title="Back to subjects">🏠</button>
+          <div>
+            <h1 id="app-title">📚 Exam Practice Hub</h1>
+            <p class="subtitle" id="app-subtitle">Pick a subject to start practicing</p>
+          </div>
         </div>
-        <button id="theme-toggle" class="icon-btn" title="Toggle dark mode">🌙</button>
+        <div class="header-actions">
+          <button id="timer-toggle" class="icon-btn hidden" title="Timer on/off">⏱ ON</button>
+          <button id="theme-toggle" class="icon-btn" title="Toggle dark mode">🌙</button>
+        </div>
       </div>
     </header>
 
-    <nav class="mode-switch">
-      <button id="btn-mcq" class="active">MCQ Mode</button>
-      <button id="btn-long">10 Marks Mode</button>
-    </nav>
-
-    <div class="top-row">
-      <div class="chapter-select">
-        <label for="chapter-select">Unit:</label>
-        <select id="chapter-select">
-          <option value="all">All Units</option>
-        </select>
-      </div>
-
-      <button id="btn-quick-test" class="ghost-btn">🧪 Test Yourself</button>
-    </div>
-
-    <section id="mcq-section" class="card">
-      <div class="meta-row">
-        <span id="mcq-unit" class="tag"></span>
-        <span id="mcq-counter" class="counter"></span>
-      </div>
-
-      <h2 id="mcq-question" class="question-text"></h2>
-
-      <div id="mcq-options" class="options-list"></div>
-
-      <div id="hint-box" class="hint-box hidden">
-        <strong>💡 Hint:</strong> <span id="hint-text"></span>
-      </div>
-
-      <div class="btn-row">
-        <button id="btn-hint" class="ghost-btn">💡 Show Hint</button>
-        <button id="btn-next-mcq" class="secondary">Next Question</button>
-      </div>
-
-      <p id="mcq-result" class="result-text"></p>
-
-      <div id="tutor-box" class="tutor-box hidden">
-        <h3>🎓 AI Tutor</h3>
-        <p id="tutor-text"></p>
-      </div>
-
-      <div class="score-row">
-        <span>Score: <strong id="mcq-score">0</strong></span>
-        <span>Attempted: <strong id="mcq-attempts">0</strong></span>
-      </div>
+    <!-- ================= HOME / SUBJECT PICKER ================= -->
+    <section id="home-section">
+      <div id="subject-grid" class="subject-grid"></div>
     </section>
 
-    <section id="long-section" class="card hidden">
-      <div class="meta-row">
-        <span id="long-unit" class="tag"></span>
-        <span id="long-counter" class="counter"></span>
-      </div>
+    <!-- ================= QUIZ AREA ================= -->
+    <div id="quiz-area" class="hidden">
 
-      <h2 id="long-question" class="question-text"></h2>
-
-      <textarea id="long-answer" rows="7" placeholder="Write your 10-marks answer here..."></textarea>
-
-      <div class="btn-row">
-        <button id="btn-show-model">Show Key Points</button>
-        <button id="btn-next-long" class="secondary">Next Question</button>
-      </div>
-
-      <div id="model-box" class="model-box hidden">
-        <h3>Key Points / Model Answer</h3>
-        <p id="model-answer"></p>
-      </div>
-    </section>
-
-    <section id="agents-section" class="card">
-      <nav class="agent-tabs">
-        <button data-tab="weak" class="active">📊 Weak Topics</button>
-        <button data-tab="revision">📝 Revision (<span id="revision-count">0</span>)</button>
-        <button data-tab="practice">🎯 Practice Coach</button>
+      <nav class="mode-switch">
+        <button id="btn-mcq" class="active">MCQ Mode</button>
+        <button id="btn-long">10 Marks Mode</button>
       </nav>
 
-      <div id="tab-weak" class="agent-panel">
-        <div id="weak-list"></div>
-        <div class="btn-row">
-          <button id="btn-reset-stats" class="ghost-btn small">Reset statistics</button>
+      <div class="top-row">
+        <div class="chapter-select">
+          <label for="chapter-select">Unit:</label>
+          <select id="chapter-select">
+            <option value="all">All Units</option>
+          </select>
         </div>
+
+        <button id="btn-quick-test" class="ghost-btn">🧪 Test Yourself</button>
       </div>
 
-      <div id="tab-revision" class="agent-panel hidden">
-        <div id="revision-list"></div>
-        <div class="btn-row">
-          <button id="btn-copy-revision" class="ghost-btn small">📋 Copy</button>
-          <button id="btn-download-revision" class="ghost-btn small">⬇️ Download .txt</button>
-          <button id="btn-clear-revision" class="ghost-btn small">🗑️ Clear</button>
+      <section id="mcq-section" class="card">
+        <div class="meta-row">
+          <span id="mcq-unit" class="tag"></span>
+          <span id="mcq-timer" class="timer hidden">⏱ 2:00</span>
+          <span id="mcq-counter" class="counter"></span>
         </div>
-      </div>
 
-      <div id="tab-practice" class="agent-panel hidden">
-        <p id="practice-advice" class="practice-advice"></p>
-        <div class="btn-row">
-          <button id="btn-start-coach">▶️ Start suggested practice</button>
+        <h2 id="mcq-question" class="question-text"></h2>
+
+        <div id="mcq-options" class="options-list"></div>
+
+        <div id="hint-box" class="hint-box hidden">
+          <strong>💡 Hint:</strong> <span id="hint-text"></span>
         </div>
-      </div>
-    </section>
+
+        <div class="btn-row">
+          <button id="btn-hint" class="ghost-btn">💡 Show Hint</button>
+          <button id="btn-next-mcq" class="secondary">Next Question</button>
+        </div>
+
+        <p id="mcq-result" class="result-text"></p>
+
+        <div id="tutor-box" class="tutor-box hidden">
+          <h3>🎓 AI Tutor</h3>
+          <p id="tutor-text"></p>
+        </div>
+
+        <div class="score-row">
+          <span>Score: <strong id="mcq-score">0</strong></span>
+          <span>Attempted: <strong id="mcq-attempts">0</strong></span>
+        </div>
+      </section>
+
+      <section id="long-section" class="card hidden">
+        <div class="meta-row">
+          <span id="long-unit" class="tag"></span>
+          <span id="long-counter" class="counter"></span>
+        </div>
+
+        <h2 id="long-question" class="question-text"></h2>
+
+        <textarea id="long-answer" rows="7" placeholder="Write your 10-marks answer here..."></textarea>
+
+        <div class="btn-row">
+          <button id="btn-show-model">Show Key Points</button>
+          <button id="btn-next-long" class="secondary">Next Question</button>
+        </div>
+
+        <div id="model-box" class="model-box hidden">
+          <h3>Key Points / Model Answer</h3>
+          <p id="model-answer"></p>
+        </div>
+      </section>
+
+      <section id="agents-section" class="card">
+        <nav class="agent-tabs">
+          <button data-tab="weak" class="active">📊 Weak Topics</button>
+          <button data-tab="revision">📝 Revision (<span id="revision-count">0</span>)</button>
+          <button data-tab="practice">🎯 Practice Coach</button>
+        </nav>
+
+        <div id="tab-weak" class="agent-panel">
+          <div id="weak-list"></div>
+          <div class="btn-row">
+            <button id="btn-reset-stats" class="ghost-btn small">Reset statistics</button>
+          </div>
+        </div>
+
+        <div id="tab-revision" class="agent-panel hidden">
+          <div id="revision-list"></div>
+          <div class="btn-row">
+            <button id="btn-copy-revision" class="ghost-btn small">📋 Copy</button>
+            <button id="btn-download-revision" class="ghost-btn small">⬇️ Download .txt</button>
+            <button id="btn-clear-revision" class="ghost-btn small">🗑️ Clear</button>
+          </div>
+        </div>
+
+        <div id="tab-practice" class="agent-panel hidden">
+          <p id="practice-advice" class="practice-advice"></p>
+          <div class="btn-row">
+            <button id="btn-start-coach">▶️ Start suggested practice</button>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <footer>
       <p>Tip: Select one unit for chapter-wise practice or choose All Units for mixed practice 📱</p>
     </footer>
   </div>
 
-  <!-- Unit MCQ files -->
-  <script src="units/unit1_mcq.js"></script>
-  <script src="units/unit2_mcq.js"></script>
-  <script src="units/unit3_mcq.js"></script>
-  <script src="units/unit4_mcq.js"></script>
-  <script src="units/unit5_mcq.js"></script>
-  <script src="units/unit6_mcq.js"></script>
-  <script src="units/unit7_mcq.js"></script>
-  <script src="units/unit8_mcq.js"></script>
-  <script src="units/unit9_mcq.js"></script>
-  <script src="units/unit10_mcq.js"></script>
-  <script src="units/unit11_mcq.js"></script>
-  <script src="units/unit12_mcq.js"></script>
-  <script src="units/unit13_mcq.js"></script>
-  <script src="units/unit14_mcq.js"></script>
-
-  <!-- Optional long-answer files. Keep these only if you have created them. -->
-  <script src="units/unit1_long.js"></script>
-  <script src="units/unit2_long.js"></script>
-  <script src="units/unit3_long.js"></script>
-  <script src="units/unit4_long.js"></script>
-  <script src="units/unit5_long.js"></script>
-  <script src="units/unit6_long.js"></script>
-  <script src="units/unit7_long.js"></script>
-  <script src="units/unit8_long.js"></script>
-  <script src="units/unit9_long.js"></script>
-  <script src="units/unit10_long.js"></script>
-  <script src="units/unit11_long.js"></script>
-  <script src="units/unit12_long.js"></script>
-  <script src="units/unit13_long.js"></script>
-  <script src="units/unit14_long.js"></script>
-
-  <script src="script.js?v=7"></script>
+  <script src="subjects.js?v=10"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>
