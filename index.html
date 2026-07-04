@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>Cloud Computing Quick Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
   <div class="app-container">
@@ -12,7 +12,7 @@
       <div class="header-top">
         <div>
           <h1>☁️ Cloud Computing Quick Test</h1>
-          <p class="subtitle">Unit-wise MCQs, instant explanations, and random quick tests</p>
+          <p class="subtitle">Unit-wise MCQs with an AI tutor, hints, weak-topic tracking, and a practice coach</p>
         </div>
         <button id="theme-toggle" class="icon-btn" title="Toggle dark mode">🌙</button>
       </div>
@@ -44,11 +44,21 @@
 
       <div id="mcq-options" class="options-list"></div>
 
+      <div id="hint-box" class="hint-box hidden">
+        <strong>💡 Hint:</strong> <span id="hint-text"></span>
+      </div>
+
       <div class="btn-row">
+        <button id="btn-hint" class="ghost-btn">💡 Show Hint</button>
         <button id="btn-next-mcq" class="secondary">Next Question</button>
       </div>
 
       <p id="mcq-result" class="result-text"></p>
+
+      <div id="tutor-box" class="tutor-box hidden">
+        <h3>🎓 AI Tutor</h3>
+        <p id="tutor-text"></p>
+      </div>
 
       <div class="score-row">
         <span>Score: <strong id="mcq-score">0</strong></span>
@@ -74,6 +84,37 @@
       <div id="model-box" class="model-box hidden">
         <h3>Key Points / Model Answer</h3>
         <p id="model-answer"></p>
+      </div>
+    </section>
+
+    <section id="agents-section" class="card">
+      <nav class="agent-tabs">
+        <button data-tab="weak" class="active">📊 Weak Topics</button>
+        <button data-tab="revision">📝 Revision (<span id="revision-count">0</span>)</button>
+        <button data-tab="practice">🎯 Practice Coach</button>
+      </nav>
+
+      <div id="tab-weak" class="agent-panel">
+        <div id="weak-list"></div>
+        <div class="btn-row">
+          <button id="btn-reset-stats" class="ghost-btn small">Reset statistics</button>
+        </div>
+      </div>
+
+      <div id="tab-revision" class="agent-panel hidden">
+        <div id="revision-list"></div>
+        <div class="btn-row">
+          <button id="btn-copy-revision" class="ghost-btn small">📋 Copy</button>
+          <button id="btn-download-revision" class="ghost-btn small">⬇️ Download .txt</button>
+          <button id="btn-clear-revision" class="ghost-btn small">🗑️ Clear</button>
+        </div>
+      </div>
+
+      <div id="tab-practice" class="agent-panel hidden">
+        <p id="practice-advice" class="practice-advice"></p>
+        <div class="btn-row">
+          <button id="btn-start-coach">▶️ Start suggested practice</button>
+        </div>
       </div>
     </section>
 
@@ -114,6 +155,6 @@
   <script src="units/unit13_long.js"></script>
   <script src="units/unit14_long.js"></script>
 
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>
