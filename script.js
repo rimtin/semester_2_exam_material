@@ -1,11 +1,12 @@
 // ======================================================
-//  EXAM PRACTICE HUB  (v9)
+//  EXAM PRACTICE HUB  (v13 fixed loader)
 //  Home page with subjects · 2:00 per-question timer with ON/OFF
 //  Agents: Hint · AI Tutor · Weak Topic · Revision · Practice Coach
 // ======================================================
 
 const QUICK_TEST_LENGTH = 10;
 const TIMER_SECONDS = 120; // 2:00 per question
+const APP_VERSION = "13"; // change this whenever unit files/script are updated
 
 // ======================================================
 //  QUESTION NORMALIZATION
@@ -14,27 +15,42 @@ const TIMER_SECONDS = 120; // 2:00 per question
 function normalizeQuestion(q, unitNo, kind) {
   const n = { ...q };
 
-  if (!n.unit) n.unit = `Unit ${unitNo}`;
+  // Accept both old unit formats and the newer generated format:
+  //   unit: "Unit 1 – Time and Work"  OR  unit: 1
+  if (!n.unit || typeof n.unit === "number") n.unit = `Unit ${unitNo}`;
+  else if (/^\d+$/.test(String(n.unit).trim())) n.unit = `Unit ${String(n.unit).trim()}`;
 
   if (kind === "mcq") {
-    n.options = Array.isArray(n.options) ? n.options : [];
-    n.correctIndex = getCorrectIndex(n);
-    n.type = n.type || "Concept MCQ";
-    n.topic = n.topic || (n.unit.split("–")[1] || n.unit).trim();
+    // Accept options as an array OR as an object: { A:"...", B:"..." }
+    if (Array.isArray(n.options)) {
+      n.options = n.options.map(String);
+    } else if (n.options && typeof n.options === "object") {
+      const order = ["A", "B", "C", "D", "E", "F"];
+      const hasLetters = order.some((k) => Object.prototype.hasOwnProperty.call(n.options, k));
+      n.options = hasLetters ? order.filter((k) => k in n.options).map((k) => String(n.options[k])) : Object.values(n.options).map(String);
+    } else {
+      n.options = [];
+    }
 
-    // Backward compatibility: derive agent fields from legacy `explanation`
+    n.correctIndex = getCorrectIndex(n);
+    n.type = n.type || n.category || "Concept MCQ";
+    n.topic = n.topic || String(n.unit).split("–")[1]?.trim() || String(n.unit).trim();
+
+    // Backward compatibility: derive agent fields from legacy `explanation` or generated `solution`/`shortcut`
     const legacy = n.explanation || "";
     const legacyParts = legacy.split(/Why others are wrong:?\s*/i);
     const legacyTutor = (legacyParts[0] || "").replace(/^Correct:\s*/i, "").trim();
     const legacyWrong = (legacyParts[1] || "").trim();
-    n.tutor = n.tutor || legacyTutor || "Review this concept from the unit notes.";
-    n.hint = n.hint || "Read the question again slowly and eliminate options that clearly don't match the key term being asked.";
+    const generatedTutor = [n.solution, n.shortcut ? `Shortcut: ${n.shortcut}` : ""].filter(Boolean).join(" ").trim();
+
+    n.tutor = n.tutor || legacyTutor || generatedTutor || "Review this concept from the unit notes.";
+    n.hint = n.hint || n.shortcut || "Read the question again slowly and eliminate options that clearly don't match the key term being asked.";
     n.revisionNote =
       n.revisionNote ||
-      `${n.question.replace(/[:?\s]+$/, "")} → ${n.options[n.correctIndex] || ""}`;
+      `${String(n.question || "Question").replace(/[:?\s]+$/, "")} → ${n.options[n.correctIndex] || ""}`;
     if (!Array.isArray(n.optionExplanations)) {
       n.optionExplanations = n.options.map((_, i) =>
-        i === n.correctIndex ? "Correct. " + n.tutor : legacyWrong
+        i === n.correctIndex ? "Correct. " + n.tutor : (legacyWrong || "Not correct. Compare it with the solved shortcut shown above.")
       );
     }
   }
@@ -59,6 +75,36 @@ function getCorrectIndex(q) {
   }
 
   return 0;
+}
+
+function normalizeNameForGlobal(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+function getQuestionArrayFromWindow(subject, unitNo, kind = "mcq") {
+  const safeName = normalizeNameForGlobal(subject?.name);
+  const safeId = normalizeNameForGlobal(subject?.id);
+  const candidates = [
+    `unit${unitNo}_${kind}`,
+    `${safeId}_unit${unitNo}_${kind}`,
+    `${safeId}_unit${unitNo}`,
+    `${safeName}_unit${unitNo}_${kind}`,
+    `${safeName}_unit${unitNo}`,
+    `analytical_unit${unitNo}_${kind}`,
+    `analytical_unit${unitNo}`,
+    `cloud_unit${unitNo}_${kind}`,
+    `cloud_unit${unitNo}`
+  ];
+
+  for (const key of candidates) {
+    const value = window[key];
+    if (Array.isArray(value) && value.length > 0) return value;
+  }
+  return [];
 }
 
 // ======================================================
@@ -244,38 +290,74 @@ async function openSubject(subject) {
   appTitle.textContent = `${subject.icon || "📘"} ${subject.name}`;
   appSubtitle.textContent = "Unit-wise MCQs with an AI tutor, hints, weak-topic tracking, and a practice coach";
 
-  if (!loadedSubjects.has(subject.id)) {
-    subjectGrid.querySelectorAll(".subject-card").forEach((c) => (c.disabled = true));
-    const loads = [];
-    for (let i = 1; i <= subject.unitCount; i++) {
-      // Try unitN_mcq.js first; fall back to extensionless unitN_mcq
-      loads.push(
-        loadScript(`${subject.path}unit${i}_mcq.js?v=10`).then((ok) =>
-          ok ? true : loadScript(`${subject.path}unit${i}_mcq?v=10`)
-        )
-      );
-      loads.push(loadScript(`${subject.path}unit${i}_long.js?v=10`)); // optional
-    }
-    await Promise.all(loads);
-    loadedSubjects.add(subject.id);
-    subjectGrid.querySelectorAll(".subject-card").forEach((c) => (c.disabled = false));
-  }
-
-  // Build question arrays for THIS subject
-  mcqQuestions = [];
-  longQuestions = [];
-  for (let i = 1; i <= subject.unitCount; i++) {
-    (window[`unit${i}_mcq`] || []).forEach((q) => mcqQuestions.push(normalizeQuestion(q, i, "mcq")));
-    (window[`unit${i}_long`] || []).forEach((q) => longQuestions.push(normalizeQuestion(q, i, "long")));
-  }
-
-  // NOTE: unit arrays are global per file name. If two subjects use the same
-  // window.unitN_mcq names, we snapshot them per subject on first load.
-  if (!subject._snapshot) {
-    subject._snapshot = { mcq: mcqQuestions, long: longQuestions };
-  } else {
+  if (subject._snapshot) {
+    // Already loaded successfully once — reuse the snapshot
     mcqQuestions = subject._snapshot.mcq;
     longQuestions = subject._snapshot.long;
+  } else {
+    subjectGrid.querySelectorAll(".subject-card").forEach((c) => (c.disabled = true));
+
+    // Clear shared globals so another subject's data can never leak in
+    for (let i = 1; i <= subject.unitCount; i++) {
+      window[`unit${i}_mcq`] = undefined;
+      window[`unit${i}_long`] = undefined;
+    }
+
+    const unitStatus = [];
+    const loads = [];
+    for (let i = 1; i <= subject.unitCount; i++) {
+      loads.push(
+        // Try unitN_mcq.js first; fall back to extensionless unitN_mcq
+        loadScript(`${subject.path}unit${i}_mcq.js?v=${APP_VERSION}`)
+          .then((ok) => (ok ? true : loadScript(`${subject.path}unit${i}_mcq?v=${APP_VERSION}`)))
+          .then((fetched) => {
+            const hasGlobal = getQuestionArrayFromWindow(subject, i, "mcq").length > 0;
+            unitStatus[i] = hasGlobal ? "ok" : fetched ? "no-global" : "missing";
+          })
+      );
+      loads.push(loadScript(`${subject.path}unit${i}_long.js?v=${APP_VERSION}`)); // optional
+    }
+    await Promise.all(loads);
+    subjectGrid.querySelectorAll(".subject-card").forEach((c) => (c.disabled = false));
+
+    // Build question arrays for THIS subject
+    mcqQuestions = [];
+    longQuestions = [];
+    for (let i = 1; i <= subject.unitCount; i++) {
+      getQuestionArrayFromWindow(subject, i, "mcq").forEach((q) => mcqQuestions.push(normalizeQuestion(q, i, "mcq")));
+      getQuestionArrayFromWindow(subject, i, "long").forEach((q) => longQuestions.push(normalizeQuestion(q, i, "long")));
+    }
+
+    // Rescue scan: files loaded but used a different global name
+    // (e.g. window.analytical_unit1 = [...]). Adopt any question-shaped arrays.
+    if (mcqQuestions.length === 0 && unitStatus.some((s) => s === "no-global")) {
+      const claimed = new Set();
+      (window.SUBJECTS || []).forEach((s) => {
+        if (s._snapshot) s._snapshot.mcq.forEach((q) => claimed.add(q));
+      });
+      for (const key of Object.getOwnPropertyNames(window)) {
+        let v;
+        try { v = window[key]; } catch { continue; }
+        if (
+          Array.isArray(v) && v.length > 0 && v[0] &&
+          typeof v[0] === "object" &&
+          typeof v[0].question === "string" &&
+          Array.isArray(v[0].options) &&
+          !claimed.has(v[0])
+        ) {
+          const numMatch = key.match(/(\d+)/);
+          const unitNo = numMatch ? Number(numMatch[1]) : 0;
+          v.forEach((q) => mcqQuestions.push(normalizeQuestion(q, unitNo, "mcq")));
+        }
+      }
+    }
+
+    subject._unitStatus = unitStatus;
+
+    // Only snapshot & cache a SUCCESSFUL load, so a re-visit retries
+    if (mcqQuestions.length > 0) {
+      subject._snapshot = { mcq: mcqQuestions, long: longQuestions };
+    }
   }
 
   loadAgentData();
@@ -305,18 +387,47 @@ async function openSubject(subject) {
   if (mcqQuestions.length === 0) {
     mcqUnitEl.textContent = "No questions found";
     mcqCounterEl.textContent = "";
-    mcqQuestionEl.textContent = `No unit files were found for ${subject.name}. Put unit1_mcq.js … unit${subject.unitCount}_mcq.js inside ${subject.path} (every file must end in .js), then hard-refresh with Ctrl+Shift+R.`;
+    mcqQuestionEl.textContent = buildLoadDiagnostic(subject);
+    mcqQuestionEl.classList.add("diagnostic");
     mcqOptionsEl.innerHTML = "";
     btnNextMcq.disabled = true;
     btnQuickTest.disabled = true;
     btnHint.classList.add("hidden");
     hideTimer();
   } else {
+    mcqQuestionEl.classList.remove("diagnostic");
     btnNextMcq.disabled = false;
     btnQuickTest.disabled = false;
     if (practiceOrder.length > 0) loadMcqQuestion(practiceOrder[practicePosition]);
   }
   if (filteredLongIndices.length > 0) loadLongQuestionFromFilter();
+}
+
+function buildLoadDiagnostic(subject) {
+  const st = subject._unitStatus || [];
+  const missing = [], noGlobal = [];
+  for (let i = 1; i <= subject.unitCount; i++) {
+    if (st[i] === "missing") missing.push(i);
+    else if (st[i] === "no-global") noGlobal.push(i);
+  }
+
+  let msg = `No questions could be loaded for ${subject.name}.\n\n`;
+
+  if (noGlobal.length > 0) {
+    msg += `⚠ ${noGlobal.length} file(s) loaded but contained no readable questions (unit ${noGlobal.join(", ")}).\n` +
+      `Open the file and make sure it assigns the array to the window object, e.g. the first line of unit1_mcq.js must be:\n\n` +
+      `    window.unit1_mcq = [ ... ];\n\n` +
+      `"const unit1_mcq = [...]" or "let ..." will NOT work.\n\n`;
+  }
+  if (missing.length > 0) {
+    msg += `✖ ${missing.length} file(s) could not be found: unit ${missing.join(", ")}.\n` +
+      `Check they exist in ${subject.path} and that every file name ends in .js (e.g. unit10_mcq.js, not unit10_mcq).\n\n`;
+  }
+  if (noGlobal.length === 0 && missing.length === 0) {
+    msg += `Put unit1_mcq.js … unit${subject.unitCount}_mcq.js inside ${subject.path}.\n\n`;
+  }
+  msg += `After fixing, hard-refresh with Ctrl+Shift+R.`;
+  return msg;
 }
 
 function goHome() {
