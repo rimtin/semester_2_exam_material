@@ -404,3 +404,145 @@ footer {
     flex-direction: column;
   }
 }
+
+/* ---------- AI LEARNING AGENTS (v7) ---------- */
+
+.hint-box {
+  margin: 0.75rem 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  border: 1px dashed var(--primary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.tutor-box {
+  margin-top: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: var(--primary-soft);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+}
+
+.tutor-box h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.tutor-box p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.opt-explain {
+  flex-basis: 100%;
+  margin-top: 0.35rem;
+  padding-left: 2.35rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.opt-explain.good { color: var(--success); }
+.opt-explain.bad  { color: var(--danger); }
+
+.option { flex-wrap: wrap; }
+
+/* Agents panel */
+.agent-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.agent-tabs button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.agent-tabs button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.agent-empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Weak Topic Agent */
+.weak-row { margin-bottom: 0.9rem; }
+
+.weak-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.weak-name { font-size: 0.88rem; font-weight: 600; }
+
+.weak-flag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  white-space: nowrap;
+}
+
+.weak-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.weak-fill { height: 100%; border-radius: 999px; }
+.weak-fill.low  { background: var(--danger); }
+.weak-fill.mid  { background: var(--warning); }
+.weak-fill.high { background: var(--success); }
+
+.weak-meta {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Revision Agent */
+.revision-unit {
+  font-size: 0.85rem;
+  margin: 0.8rem 0 0.35rem;
+  color: var(--primary);
+}
+
+.revision-note {
+  font-size: 0.87rem;
+  line-height: 1.5;
+  margin-bottom: 0.3rem;
+}
+
+/* Practice Coach */
+.practice-advice {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+
+.ghost-btn.small {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}
