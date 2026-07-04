@@ -2,7 +2,7 @@
 // Unit 14: Non-Verbal Reasoning
 // 45 MCQs = 15 Self-Assessment Based + 20 Concept MCQs + 10 Tricky Exam MCQs
 
-const analyticalUnit14MCQ = [
+const analyticalUnit14MCQs = [
   // =========================
   // 15 SELF-ASSESSMENT BASED
   // =========================
