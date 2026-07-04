@@ -1,15 +1,14 @@
 // ======================================================
-//  CLOUD COMPUTING QUICK TEST APP  (v7 — AI Learning Agents)
+//  EXAM PRACTICE HUB  (v9)
+//  Home page with subjects · 2:00 per-question timer with ON/OFF
 //  Agents: Hint · AI Tutor · Weak Topic · Revision · Practice Coach
 // ======================================================
 
-const TOTAL_UNITS = 14;
 const QUICK_TEST_LENGTH = 10;
-const STATS_KEY = "quiz-agent-stats";
-const REVISION_KEY = "quiz-agent-revision";
+const TIMER_SECONDS = 120; // 2:00 per question
 
 // ======================================================
-//  BUILD MASTER QUESTION ARRAYS FROM UNIT FILES
+//  QUESTION NORMALIZATION
 // ======================================================
 
 function normalizeQuestion(q, unitNo, kind) {
@@ -25,14 +24,17 @@ function normalizeQuestion(q, unitNo, kind) {
 
     // Backward compatibility: derive agent fields from legacy `explanation`
     const legacy = n.explanation || "";
-    n.tutor = n.tutor || legacy || "Review this concept from the unit notes.";
+    const legacyParts = legacy.split(/Why others are wrong:?\s*/i);
+    const legacyTutor = (legacyParts[0] || "").replace(/^Correct:\s*/i, "").trim();
+    const legacyWrong = (legacyParts[1] || "").trim();
+    n.tutor = n.tutor || legacyTutor || "Review this concept from the unit notes.";
     n.hint = n.hint || "Read the question again slowly and eliminate options that clearly don't match the key term being asked.";
     n.revisionNote =
       n.revisionNote ||
       `${n.question.replace(/[:?\s]+$/, "")} → ${n.options[n.correctIndex] || ""}`;
     if (!Array.isArray(n.optionExplanations)) {
       n.optionExplanations = n.options.map((_, i) =>
-        i === n.correctIndex ? "Correct. " + n.tutor : ""
+        i === n.correctIndex ? "Correct. " + n.tutor : legacyWrong
       );
     }
   }
@@ -59,21 +61,13 @@ function getCorrectIndex(q) {
   return 0;
 }
 
-function collectQuestions(kind) {
-  const all = [];
-  for (let i = 1; i <= TOTAL_UNITS; i++) {
-    const unitArray = window[`unit${i}_${kind}`] || [];
-    unitArray.forEach((q) => all.push(normalizeQuestion(q, i, kind)));
-  }
-  return all;
-}
-
-const mcqQuestions = collectQuestions("mcq");
-const longQuestions = collectQuestions("long");
-
 // ======================================================
 //  STATE
 // ======================================================
+
+let currentSubject = null;
+let mcqQuestions = [];
+let longQuestions = [];
 
 let currentChapter = "all";
 let currentMcqIndex = 0;
@@ -95,12 +89,23 @@ let quickOrder = [];
 let quickTotal = 0;
 let quickPosition = 0;
 
-// Practice Coach custom set
 let coachSet = null; // { label, indices }
+
+// Timer state
+let timerEnabled = localStorage.getItem("quiz-timer-on") !== "off";
+let timerInterval = null;
+let timeLeft = TIMER_SECONDS;
 
 // ======================================================
 //  ELEMENT REFERENCES
 // ======================================================
+
+const homeSection = document.getElementById("home-section");
+const subjectGrid = document.getElementById("subject-grid");
+const quizArea = document.getElementById("quiz-area");
+const btnHome = document.getElementById("btn-home");
+const appTitle = document.getElementById("app-title");
+const appSubtitle = document.getElementById("app-subtitle");
 
 const btnMcqMode = document.getElementById("btn-mcq");
 const btnLongMode = document.getElementById("btn-long");
@@ -110,6 +115,8 @@ const longSection = document.getElementById("long-section");
 
 const mcqUnitEl = document.getElementById("mcq-unit");
 const mcqCounterEl = document.getElementById("mcq-counter");
+const mcqTimerEl = document.getElementById("mcq-timer");
+const timerToggleBtn = document.getElementById("timer-toggle");
 const mcqQuestionEl = document.getElementById("mcq-question");
 const mcqOptionsEl = document.getElementById("mcq-options");
 const mcqResultEl = document.getElementById("mcq-result");
@@ -151,22 +158,27 @@ const btnQuickTest = document.getElementById("btn-quick-test");
 const themeToggleBtn = document.getElementById("theme-toggle");
 
 // ======================================================
-//  PERSISTENT LEARNING DATA  (Weak Topic + Revision Agents)
+//  PERSISTENT LEARNING DATA (per subject)
 // ======================================================
 
+function statsKey() { return `quiz-agent-stats:${currentSubject?.id || "default"}`; }
+function revisionKey() { return `quiz-agent-revision:${currentSubject?.id || "default"}`; }
+
 function loadJSON(key, fallback) {
-  try {
-    return JSON.parse(localStorage.getItem(key)) || fallback;
-  } catch {
-    return fallback;
-  }
+  try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+  catch { return fallback; }
 }
 
-let agentStats = loadJSON(STATS_KEY, { units: {} });
-let revisionNotes = loadJSON(REVISION_KEY, []);
+let agentStats = { units: {} };
+let revisionNotes = [];
 
-function saveStats() { localStorage.setItem(STATS_KEY, JSON.stringify(agentStats)); }
-function saveRevision() { localStorage.setItem(REVISION_KEY, JSON.stringify(revisionNotes)); }
+function loadAgentData() {
+  agentStats = loadJSON(statsKey(), { units: {} });
+  revisionNotes = loadJSON(revisionKey(), []);
+}
+
+function saveStats() { localStorage.setItem(statsKey(), JSON.stringify(agentStats)); }
+function saveRevision() { localStorage.setItem(revisionKey(), JSON.stringify(revisionNotes)); }
 
 function recordAnswer(q, wasCorrect) {
   const u = (agentStats.units[q.unit] ||= { attempts: 0, wrong: 0, byType: {} });
@@ -178,18 +190,9 @@ function recordAnswer(q, wasCorrect) {
     u.wrong++;
     t.wrong++;
 
-    // Revision Agent: collect the note (dedupe by question text)
     const existing = revisionNotes.find((n) => n.question === q.question);
-    if (existing) {
-      existing.count++;
-    } else {
-      revisionNotes.push({
-        unit: q.unit,
-        question: q.question,
-        note: q.revisionNote,
-        count: 1,
-      });
-    }
+    if (existing) existing.count++;
+    else revisionNotes.push({ unit: q.unit, question: q.question, note: q.revisionNote, count: 1 });
     saveRevision();
   }
 
@@ -197,6 +200,215 @@ function recordAnswer(q, wasCorrect) {
   renderWeakTopics();
   renderRevision();
   renderPracticeAdvice();
+}
+
+// ======================================================
+//  HOME PAGE / SUBJECT LOADING
+// ======================================================
+
+function renderHome() {
+  subjectGrid.innerHTML = "";
+  (window.SUBJECTS || []).forEach((s) => {
+    const card = document.createElement("button");
+    card.className = "subject-card";
+    card.innerHTML = `
+      <span class="subject-icon">${s.icon || "📘"}</span>
+      <span class="subject-name">${escapeHtml(s.name)}</span>
+      <span class="subject-desc">${escapeHtml(s.description || "")}</span>
+      <span class="subject-stats">${escapeHtml(s.stats || "")}</span>
+    `;
+    card.addEventListener("click", () => openSubject(s));
+    subjectGrid.appendChild(card);
+  });
+
+  if ((window.SUBJECTS || []).length === 0) {
+    subjectGrid.innerHTML = `<p class="agent-empty">No subjects configured. Add one in subjects.js.</p>`;
+  }
+}
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = () => resolve(true);
+    s.onerror = () => resolve(false); // missing optional files are fine
+    document.head.appendChild(s);
+  });
+}
+
+const loadedSubjects = new Set();
+
+async function openSubject(subject) {
+  currentSubject = subject;
+
+  appTitle.textContent = `${subject.icon || "📘"} ${subject.name}`;
+  appSubtitle.textContent = "Unit-wise MCQs with an AI tutor, hints, weak-topic tracking, and a practice coach";
+
+  if (!loadedSubjects.has(subject.id)) {
+    subjectGrid.querySelectorAll(".subject-card").forEach((c) => (c.disabled = true));
+    const loads = [];
+    for (let i = 1; i <= subject.unitCount; i++) {
+      // Try unitN_mcq.js first; fall back to extensionless unitN_mcq
+      loads.push(
+        loadScript(`${subject.path}unit${i}_mcq.js?v=10`).then((ok) =>
+          ok ? true : loadScript(`${subject.path}unit${i}_mcq?v=10`)
+        )
+      );
+      loads.push(loadScript(`${subject.path}unit${i}_long.js?v=10`)); // optional
+    }
+    await Promise.all(loads);
+    loadedSubjects.add(subject.id);
+    subjectGrid.querySelectorAll(".subject-card").forEach((c) => (c.disabled = false));
+  }
+
+  // Build question arrays for THIS subject
+  mcqQuestions = [];
+  longQuestions = [];
+  for (let i = 1; i <= subject.unitCount; i++) {
+    (window[`unit${i}_mcq`] || []).forEach((q) => mcqQuestions.push(normalizeQuestion(q, i, "mcq")));
+    (window[`unit${i}_long`] || []).forEach((q) => longQuestions.push(normalizeQuestion(q, i, "long")));
+  }
+
+  // NOTE: unit arrays are global per file name. If two subjects use the same
+  // window.unitN_mcq names, we snapshot them per subject on first load.
+  if (!subject._snapshot) {
+    subject._snapshot = { mcq: mcqQuestions, long: longQuestions };
+  } else {
+    mcqQuestions = subject._snapshot.mcq;
+    longQuestions = subject._snapshot.long;
+  }
+
+  loadAgentData();
+
+  // Reset quiz state
+  currentChapter = "all";
+  coachSet = null;
+  isQuickTest = false;
+  chapterSelect.innerHTML = `<option value="all">All Units</option>`;
+  populateChapterSelect();
+  initLongModeVisibility();
+  updateFilteredIndices();
+  startPracticeOrder();
+  resetScore();
+  renderWeakTopics();
+  renderRevision();
+  renderPracticeAdvice();
+  openAgentTab("weak");
+  showMode("mcq");
+  exitQuickTest();
+
+  homeSection.classList.add("hidden");
+  quizArea.classList.remove("hidden");
+  btnHome.classList.remove("hidden");
+  timerToggleBtn.classList.remove("hidden");
+
+  if (mcqQuestions.length === 0) {
+    mcqUnitEl.textContent = "No questions found";
+    mcqCounterEl.textContent = "";
+    mcqQuestionEl.textContent = `No unit files were found for ${subject.name}. Put unit1_mcq.js … unit${subject.unitCount}_mcq.js inside ${subject.path} (every file must end in .js), then hard-refresh with Ctrl+Shift+R.`;
+    mcqOptionsEl.innerHTML = "";
+    btnNextMcq.disabled = true;
+    btnQuickTest.disabled = true;
+    btnHint.classList.add("hidden");
+    hideTimer();
+  } else {
+    btnNextMcq.disabled = false;
+    btnQuickTest.disabled = false;
+    if (practiceOrder.length > 0) loadMcqQuestion(practiceOrder[practicePosition]);
+  }
+  if (filteredLongIndices.length > 0) loadLongQuestionFromFilter();
+}
+
+function goHome() {
+  stopTimer();
+  currentSubject = null;
+  quizArea.classList.add("hidden");
+  homeSection.classList.remove("hidden");
+  btnHome.classList.add("hidden");
+  timerToggleBtn.classList.add("hidden");
+  appTitle.textContent = "📚 Exam Practice Hub";
+  appSubtitle.textContent = "Pick a subject to start practicing";
+}
+
+btnHome.addEventListener("click", goHome);
+
+// ======================================================
+//  QUESTION TIMER (2:00, with ON/OFF toggle)
+// ======================================================
+
+function renderTimerToggle() {
+  timerToggleBtn.textContent = timerEnabled ? "⏱ ON" : "⏱ OFF";
+  timerToggleBtn.classList.toggle("timer-off", !timerEnabled);
+}
+
+timerToggleBtn.addEventListener("click", () => {
+  timerEnabled = !timerEnabled;
+  localStorage.setItem("quiz-timer-on", timerEnabled ? "on" : "off");
+  renderTimerToggle();
+
+  if (timerEnabled && !mcqAnswered && currentSubject) startTimer();
+  else stopTimer();
+});
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m}:${String(sec).padStart(2, "0")}`;
+}
+
+function startTimer() {
+  stopTimer();
+  if (!timerEnabled) return;
+
+  timeLeft = TIMER_SECONDS;
+  mcqTimerEl.textContent = `⏱ ${formatTime(timeLeft)}`;
+  mcqTimerEl.classList.remove("hidden", "timer-warn");
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    mcqTimerEl.textContent = `⏱ ${formatTime(timeLeft)}`;
+    if (timeLeft <= 30) mcqTimerEl.classList.add("timer-warn");
+    if (timeLeft <= 0) {
+      stopTimer();
+      handleTimeout();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+function hideTimer() {
+  stopTimer();
+  mcqTimerEl.classList.add("hidden");
+}
+
+function handleTimeout() {
+  if (mcqAnswered) return;
+  mcqAnswered = true;
+
+  const q = mcqQuestions[currentMcqIndex];
+  const correctIndex = getCorrectIndex(q);
+  const optionLabels = mcqOptionsEl.querySelectorAll(".option");
+
+  mcqAttempts++;
+
+  optionLabels.forEach((label, i) => {
+    label.classList.add("locked");
+    label.style.pointerEvents = "none";
+    if (i === correctIndex) label.classList.add("correct");
+  });
+
+  mcqResultEl.textContent = `⏰ Time's up! Correct answer: ${q.options[correctIndex]}`;
+  mcqResultEl.className = "result-text wrong";
+  mcqTimerEl.textContent = "⏱ 0:00";
+
+  btnHint.classList.add("hidden");
+  showTutor(q, -1);
+  recordAnswer(q, false);
+  updateScoreDisplay();
 }
 
 // ======================================================
@@ -234,11 +446,13 @@ function showMode(mode) {
     btnLongMode.classList.remove("active");
     mcqSection.classList.remove("hidden");
     longSection.classList.add("hidden");
+    if (!mcqAnswered && mcqQuestions.length > 0) startTimer();
   } else {
     btnLongMode.classList.add("active");
     btnMcqMode.classList.remove("active");
     longSection.classList.remove("hidden");
     mcqSection.classList.add("hidden");
+    stopTimer();
   }
 }
 
@@ -333,13 +547,11 @@ function loadMcqQuestion(index) {
   mcqResultEl.textContent = "";
   mcqResultEl.className = "result-text";
 
-  // Hint Agent: fresh hint per question, hidden until requested
   hintBox.classList.add("hidden");
   hintText.textContent = "";
   btnHint.classList.remove("hidden");
   btnHint.disabled = false;
 
-  // Tutor Agent: hidden until the student answers
   tutorBox.classList.add("hidden");
   tutorText.textContent = "";
 
@@ -369,6 +581,9 @@ function loadMcqQuestion(index) {
 
     label.addEventListener("click", () => handleMcqSelection(i));
   });
+
+  if (timerEnabled) startTimer();
+  else hideTimer();
 }
 
 // ---------------- Hint Agent ----------------
@@ -388,7 +603,6 @@ function showTutor(q, selectedIndex) {
   tutorText.textContent = q.tutor;
   tutorBox.classList.remove("hidden");
 
-  // Explain every option in place
   const optionLabels = mcqOptionsEl.querySelectorAll(".option");
   optionLabels.forEach((label, i) => {
     const explanation = q.optionExplanations[i];
@@ -406,6 +620,7 @@ function showTutor(q, selectedIndex) {
 function handleMcqSelection(selectedIndex) {
   if (mcqAnswered) return;
   mcqAnswered = true;
+  stopTimer();
 
   const q = mcqQuestions[currentMcqIndex];
   const correctIndex = getCorrectIndex(q);
@@ -445,6 +660,7 @@ btnNextMcq.addEventListener("click", () => {
       mcqResultEl.textContent = `🎉 Quick Test finished! Score: ${mcqScore}/${quickTotal}`;
       mcqResultEl.className = "result-text correct";
       exitQuickTest(false);
+      hideTimer();
       renderPracticeAdvice();
       openAgentTab("practice");
       return;
@@ -537,9 +753,7 @@ function getWeakUnits() {
 
 function renderWeakTopics() {
   const entries = Object.entries(agentStats.units).map(([unit, u]) => ({
-    unit,
-    ...u,
-    accuracy: getUnitAccuracy(u),
+    unit, ...u, accuracy: getUnitAccuracy(u),
   }));
 
   if (entries.length === 0) {
@@ -581,7 +795,6 @@ function renderRevision() {
     return;
   }
 
-  // Group by unit, most-missed first inside each unit
   const byUnit = new Map();
   revisionNotes.forEach((n) => {
     if (!byUnit.has(n.unit)) byUnit.set(n.unit, []);
@@ -597,8 +810,7 @@ function renderRevision() {
       h.textContent = unit;
       revisionList.appendChild(h);
 
-      byUnit
-        .get(unit)
+      byUnit.get(unit)
         .sort((a, b) => b.count - a.count)
         .forEach((n) => {
           const p = document.createElement("p");
@@ -610,7 +822,7 @@ function renderRevision() {
 }
 
 function revisionAsText() {
-  let out = "REVISION SUMMARY — generated from your wrong answers\n\n";
+  let out = `REVISION SUMMARY — ${currentSubject?.name || ""}\nGenerated from your wrong answers\n\n`;
   const byUnit = new Map();
   revisionNotes.forEach((n) => {
     if (!byUnit.has(n.unit)) byUnit.set(n.unit, []);
@@ -620,8 +832,7 @@ function revisionAsText() {
     .sort((a, b) => getUnitNumber(a) - getUnitNumber(b))
     .forEach((unit) => {
       out += unit + "\n";
-      byUnit
-        .get(unit)
+      byUnit.get(unit)
         .sort((a, b) => b.count - a.count)
         .forEach((n) => {
           out += "  • " + n.note + (n.count > 1 ? `  (missed ${n.count}x)` : "") + "\n";
@@ -648,21 +859,21 @@ btnDownloadRevision.addEventListener("click", () => {
   const blob = new Blob([revisionAsText()], { type: "text/plain" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "revision-summary.txt";
+  a.download = `revision-${currentSubject?.id || "notes"}.txt`;
   a.click();
   URL.revokeObjectURL(a.href);
 });
 
 btnClearRevision.addEventListener("click", () => {
   if (revisionNotes.length === 0) return;
-  if (!confirm("Clear all revision notes?")) return;
+  if (!confirm("Clear all revision notes for this subject?")) return;
   revisionNotes = [];
   saveRevision();
   renderRevision();
 });
 
 btnResetStats.addEventListener("click", () => {
-  if (!confirm("Reset all weak-topic statistics?")) return;
+  if (!confirm("Reset weak-topic statistics for this subject?")) return;
   agentStats = { units: {} };
   saveStats();
   renderWeakTopics();
@@ -679,8 +890,7 @@ function buildCoachPlan() {
 
   if (totalAttempts < 5) {
     return {
-      message:
-        "Answer at least 5 questions so I can measure your level. Then I'll suggest the right practice set for you.",
+      message: "Answer at least 5 questions so I can measure your level. Then I'll suggest the right practice set for you.",
       plan: null,
     };
   }
@@ -689,7 +899,6 @@ function buildCoachPlan() {
   const pct = Math.round(accuracy * 100);
   const weak = getWeakUnits();
   const weakest = weak[0];
-
   const attemptedUnits = Object.keys(agentStats.units);
 
   if (accuracy < 0.5) {
@@ -735,7 +944,6 @@ function buildCoachPlan() {
     };
   }
 
-  // Strong student → mixed tricky challenge
   const tricky = mcqQuestions
     .map((q, i) => (q.type === "Tricky Exam MCQ" ? i : -1))
     .filter((i) => i !== -1);
@@ -750,7 +958,6 @@ function renderPracticeAdvice() {
   const { message, plan } = buildCoachPlan();
   practiceAdvice.textContent = message;
   btnStartCoach.classList.toggle("hidden", !plan || plan.indices.length === 0);
-  btnStartCoach.dataset.ready = plan ? "1" : "";
 }
 
 btnStartCoach.addEventListener("click", () => {
@@ -847,41 +1054,14 @@ function updateScoreDisplay() {
 }
 
 function initLongModeVisibility() {
-  if (longQuestions.length === 0) {
-    btnLongMode.style.display = "none";
-    longSection.classList.add("hidden");
-  }
-}
-
-function initEmptyState() {
-  if (mcqQuestions.length === 0) {
-    mcqUnitEl.textContent = "No questions loaded";
-    mcqCounterEl.textContent = "";
-    mcqQuestionEl.textContent =
-      "Please check that your unit files are inside the units folder and loaded before script.js.";
-    btnNextMcq.disabled = true;
-    btnQuickTest.disabled = true;
-  }
+  const hasLong = longQuestions.length > 0;
+  btnLongMode.style.display = hasLong ? "" : "none";
+  if (!hasLong) longSection.classList.add("hidden");
 }
 
 // ======================================================
 //  INIT
 // ======================================================
 
-function init() {
-  populateChapterSelect();
-  initLongModeVisibility();
-  updateFilteredIndices();
-  startPracticeOrder();
-  resetScore();
-  initEmptyState();
-
-  renderWeakTopics();
-  renderRevision();
-  renderPracticeAdvice();
-
-  if (practiceOrder.length > 0) loadMcqQuestion(practiceOrder[practicePosition]);
-  if (filteredLongIndices.length > 0) loadLongQuestionFromFilter();
-}
-
-init();
+renderTimerToggle();
+renderHome();
