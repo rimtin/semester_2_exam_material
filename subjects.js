@@ -13,7 +13,7 @@ window.SUBJECTS = [
     icon: "☁️",
     description: "Cloud models, services, virtualization, big data, security and collaboration tools.",
     unitCount: 14,
-    stats: "14 units",
+    stats: "14 units · 630 MCQs",
     path: "subjects/cloud/units/",
   },
 
@@ -23,7 +23,7 @@ window.SUBJECTS = [
     icon: "🧠",
     description: "Reasoning, problem solving, and analytical ability practice for the exam.",
     unitCount: 14,
-    stats: "14 units",
+    stats: "14 units · 630 MCQs",
     path: "subjects/analytical/units/",
   },
 
