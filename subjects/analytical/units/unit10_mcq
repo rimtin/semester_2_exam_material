@@ -1,4 +1,4 @@
-const analytical_unit10_mcq = [
+window.unit10_mcq = [
   // =========================
   // Unit 10: Calendar
   // 15 Self-Assessment Based MCQs
