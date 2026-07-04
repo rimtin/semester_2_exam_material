@@ -1,0 +1,560 @@
+// unit6_mcq.js
+// Analytical Skills-II
+// Unit 6: Alphabet Test and Logical Sequence of Words
+// 15 Self-Assessment Based + 20 Concept MCQs + 10 Tricky Exam MCQs
+
+const analyticalUnit6MCQs = [
+  // =========================
+  // 15 SELF-ASSESSMENT BASED
+  // =========================
+  {
+    id: "AS-U6-SA-01",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Dictionary Order",
+    question: "Arrange the words in dictionary order and find the middle word: Sausage, Savage, Save, Saviour, Savour",
+    options: ["Sausage", "Savage", "Save", "Saviour"],
+    answer: "C",
+    correctAnswer: "Save",
+    solution: "Dictionary order is: Sausage, Savage, Save, Saviour, Savour. The middle word is Save.",
+    shortcut: "Compare letters from left to right; the first different letter decides the order."
+  },
+  {
+    id: "AS-U6-SA-02",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Letter Position",
+    question: "How many letters in the word BRAVE are in the same position as in the English alphabet?",
+    options: ["None", "One", "Two", "Three"],
+    answer: "B",
+    correctAnswer: "One",
+    solution: "BRAVE positions: B is at 1st place but alphabet position 2, R is 18, A is 1, V is 22, E is 5. Only E is at the 5th position in the word and alphabet.",
+    shortcut: "Write alphabet values: A=1, B=2, C=3 ... Z=26."
+  },
+  {
+    id: "AS-U6-SA-03",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Alphabetical Quibble",
+    question: "If every fourth letter in the English alphabet is replaced by #, what is ninth to the left of the fourteenth element from the left?",
+    options: ["E", "#", "W", "F"],
+    answer: "A",
+    correctAnswer: "E",
+    solution: "New series: A B C # E F G # I J K # M N O # Q R S # U V W # Y Z. The 14th element is N. Ninth to the left of N is E.",
+    shortcut: "First create the modified alphabet, then count positions carefully."
+  },
+  {
+    id: "AS-U6-SA-04",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "New Word Formation",
+    question: "Using the 2nd, 3rd, 6th and 8th letters of FRAGMENT, how many meaningful words can be formed?",
+    options: ["1", "2", "3", "4"],
+    answer: "C",
+    correctAnswer: "3",
+    solution: "FRAGMENT letters: 2nd = R, 3rd = A, 6th = E, 8th = T. Words possible: TEAR, TARE, RATE. So, 3 words can be formed.",
+    shortcut: "Extract required letters first, then try common rearrangements."
+  },
+  {
+    id: "AS-U6-SA-05",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Logical Sequence",
+    question: "Arrange the words in a meaningful sequence: 1. Crop 2. Root 3. Stem 4. Seed 5. Flower",
+    options: ["2, 3, 5, 1, 4", "2, 4, 5, 1, 3", "2, 3, 4, 1, 5", "4, 2, 3, 5, 1"],
+    answer: "D",
+    correctAnswer: "4, 2, 3, 5, 1",
+    solution: "A plant grows in this order: Seed → Root → Stem → Flower → Crop. So the sequence is 4, 2, 3, 5, 1.",
+    shortcut: "For logical sequence, think of natural order or process order."
+  },
+  {
+    id: "AS-U6-SA-06",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Meaningful Word Arrangement",
+    question: "Select the number combination that forms a meaningful word: N A E H L D / 1 2 3 4 5 6",
+    options: ["2, 1, 6, 4, 3, 5", "2, 6, 4, 3, 5, 1", "4, 2, 1, 6, 5, 3", "4, 3, 6, 5, 2, 1"],
+    answer: "C",
+    correctAnswer: "4, 2, 1, 6, 5, 3",
+    solution: "4=H, 2=A, 1=N, 6=D, 5=L, 3=E. The word formed is HANDLE.",
+    shortcut: "Replace each number with its assigned letter and check the word."
+  },
+  {
+    id: "AS-U6-SA-07",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "New Word Formation",
+    question: "Which meaningful word can be formed using the 1st, 3rd, 5th and 6th letters of TRADEMARK?",
+    options: ["TEAM", "ROAD", "DARK", "MARK"],
+    answer: "A",
+    correctAnswer: "TEAM",
+    solution: "TRADEMARK letters: 1st = T, 3rd = A, 5th = E, 6th = M. These letters can form TEAM.",
+    shortcut: "Pick only the required letters before checking options."
+  },
+  {
+    id: "AS-U6-SA-08",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Mixed Arrangement",
+    question: "R E 5 D A P $ 3 T I Q 7 9 B # 2 K % U 1 M W 4 * J 8 N. Which element is exactly in the middle between 3 and 1?",
+    options: ["B", "K", "9", "#"],
+    answer: "A",
+    correctAnswer: "B",
+    solution: "3 is at position 8 and 1 is at position 20. Middle position = (8+20)/2 = 14. The 14th element is B.",
+    shortcut: "Middle position = average of the two positions."
+  },
+  {
+    id: "AS-U6-SA-09",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Dictionary Order",
+    question: "Arrange in dictionary order: 1. PHYSICAL 2. PHYSICS 3. PHYSIOLOGY 4. PHYSICIAN 5. PHONE",
+    options: ["5, 1, 4, 2, 3", "5, 1, 2, 3, 4", "1, 4, 5, 2, 3", "1, 5, 4, 3, 2"],
+    answer: "A",
+    correctAnswer: "5, 1, 4, 2, 3",
+    solution: "PHONE comes first because 'Pho' comes before 'Phy'. Among PHYSI words: PHYSICAL, PHYSICIAN, PHYSICS, PHYSIOLOGY. So order is 5, 1, 4, 2, 3.",
+    shortcut: "Compare letter by letter until the first difference appears."
+  },
+  {
+    id: "AS-U6-SA-10",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Dictionary Order",
+    question: "Arrange in dictionary order: 1. Ambitions 2. Ambiguous 3. Ambiguity 4. Animation 5. Animal",
+    options: ["3, 2, 4, 1, 5", "3, 2, 5, 4, 1", "3, 2, 1, 5, 4", "3, 2, 4, 5, 1"],
+    answer: "C",
+    correctAnswer: "3, 2, 1, 5, 4",
+    solution: "Ambiguity comes before Ambiguous, then Ambitions. Animal comes before Animation. So order is 3, 2, 1, 5, 4.",
+    shortcut: "Dictionary order follows exact spelling, not word length first."
+  },
+  {
+    id: "AS-U6-SA-11",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Dictionary Order",
+    question: "Arrange the words in dictionary order: 1. Brittle 2. Brisk 3. Bright 4. Bride",
+    options: ["4, 3, 2, 1", "1, 2, 3, 4", "2, 3, 4, 1", "4, 2, 1, 3"],
+    answer: "A",
+    correctAnswer: "4, 3, 2, 1",
+    solution: "All begin with Bri. Next letters are d, g, s, t. So order is Bride, Bright, Brisk, Brittle.",
+    shortcut: "When starting letters are same, compare the next different letter."
+  },
+  {
+    id: "AS-U6-SA-12",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Logical Sequence",
+    question: "Arrange in meaningful sequence: 1. Letter 2. Word 3. Sentence 4. Paragraph 5. Chapter 6. Book",
+    options: ["1, 2, 3, 4, 5, 6", "6, 5, 4, 3, 2, 1", "2, 1, 3, 4, 5, 6", "1, 3, 2, 4, 6, 5"],
+    answer: "A",
+    correctAnswer: "1, 2, 3, 4, 5, 6",
+    solution: "A letter forms a word, words form a sentence, sentences form a paragraph, paragraphs form a chapter, and chapters form a book.",
+    shortcut: "Use smallest unit to largest unit."
+  },
+  {
+    id: "AS-U6-SA-13",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Meaningful Word Arrangement",
+    question: "Select the combination that forms a meaningful word: T L P N A E / 1 2 3 4 5 6",
+    options: ["3, 2, 5, 4, 1, 6", "3, 2, 5, 4, 6, 1", "4, 5, 3, 6, 2, 1", "4, 6, 1, 3, 5, 2"],
+    answer: "B",
+    correctAnswer: "3, 2, 5, 4, 6, 1",
+    solution: "3=P, 2=L, 5=A, 4=N, 6=E, 1=T. The word formed is PLANET.",
+    shortcut: "Write letters below numbers, then decode the option."
+  },
+  {
+    id: "AS-U6-SA-14",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Logical Sequence",
+    question: "Arrange in meaningful sequence: 1. Adult 2. Infant 3. Old age 4. Child 5. Teenager",
+    options: ["2, 4, 5, 1, 3", "4, 2, 5, 1, 3", "2, 5, 4, 1, 3", "3, 1, 5, 4, 2"],
+    answer: "A",
+    correctAnswer: "2, 4, 5, 1, 3",
+    solution: "Human life stages are: Infant → Child → Teenager → Adult → Old age.",
+    shortcut: "For age/life-cycle questions, arrange from earliest to latest."
+  },
+  {
+    id: "AS-U6-SA-15",
+    unit: 6,
+    category: "Self-Assessment Based",
+    topic: "Alphabet Position",
+    question: "Which letter is 7th to the left of the 20th letter from the left in the English alphabet?",
+    options: ["L", "M", "N", "O"],
+    answer: "B",
+    correctAnswer: "M",
+    solution: "20th letter from the left is T. Seven letters to the left of T is M.",
+    shortcut: "Position from left: A=1, B=2 ... T=20. Then subtract 7."
+  },
+
+  // =================
+  // 20 CONCEPT MCQs
+  // =================
+  {
+    id: "AS-U6-C-16",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabet Position",
+    question: "Which letter is 5th to the right of the 12th letter from the left?",
+    options: ["P", "R", "Q", "S"],
+    answer: "C",
+    correctAnswer: "Q",
+    solution: "12th letter is L. Five letters to the right of L is Q.",
+    shortcut: "Move right means add positions: 12 + 5 = 17, and 17 = Q."
+  },
+  {
+    id: "AS-U6-C-17",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabet Position",
+    question: "Which letter is 8th from the right in the English alphabet?",
+    options: ["S", "T", "R", "U"],
+    answer: "A",
+    correctAnswer: "S",
+    solution: "From right: Z=1, Y=2, X=3, W=4, V=5, U=6, T=7, S=8.",
+    shortcut: "Nth from right = 27 - n from left."
+  },
+  {
+    id: "AS-U6-C-18",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Reverse Alphabet",
+    question: "If the English alphabet is written in reverse order, which letter is 10th from the left?",
+    options: ["P", "Q", "R", "S"],
+    answer: "B",
+    correctAnswer: "Q",
+    solution: "Reverse order starts: Z, Y, X, W, V, U, T, S, R, Q. So 10th is Q.",
+    shortcut: "Reverse alphabet: 1st=Z, 2nd=Y, 3rd=X..."
+  },
+  {
+    id: "AS-U6-C-19",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Middle Letter",
+    question: "Which letter comes exactly between F and P in the English alphabet?",
+    options: ["J", "K", "L", "M"],
+    answer: "B",
+    correctAnswer: "K",
+    solution: "F is 6 and P is 16. Middle position = (6+16)/2 = 11. The 11th letter is K.",
+    shortcut: "For middle letter, average the alphabet positions."
+  },
+  {
+    id: "AS-U6-C-20",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabetical Arrangement",
+    question: "If the letters of COMPUTER are arranged alphabetically, which letter will be 4th from the left?",
+    options: ["M", "O", "P", "R"],
+    answer: "B",
+    correctAnswer: "O",
+    solution: "COMPUTER arranged alphabetically: C, E, M, O, P, R, T, U. The 4th letter is O.",
+    shortcut: "Arrange letters in A-Z order before counting."
+  },
+  {
+    id: "AS-U6-C-21",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Dictionary Order",
+    question: "Arrange in dictionary order: Apple, Apply, Apart, Apex",
+    options: ["Apple, Apply, Apart, Apex", "Apex, Apart, Apple, Apply", "Apart, Apex, Apple, Apply", "Apart, Apple, Apex, Apply"],
+    answer: "C",
+    correctAnswer: "Apart, Apex, Apple, Apply",
+    solution: "Compare after 'Ap': Apart has 'a', Apex has 'e', Apple and Apply have 'p'. Apple comes before Apply. So order is Apart, Apex, Apple, Apply.",
+    shortcut: "Dictionary order depends on the first different letter."
+  },
+  {
+    id: "AS-U6-C-22",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Logical Sequence",
+    question: "Arrange the stages: 1. Butterfly 2. Egg 3. Pupa 4. Larva",
+    options: ["2, 4, 3, 1", "2, 3, 4, 1", "4, 2, 3, 1", "1, 2, 3, 4"],
+    answer: "A",
+    correctAnswer: "2, 4, 3, 1",
+    solution: "Life cycle of a butterfly: Egg → Larva → Pupa → Butterfly.",
+    shortcut: "Use natural life-cycle order."
+  },
+  {
+    id: "AS-U6-C-23",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Logical Sequence",
+    question: "Arrange in logical sequence: 1. Paint 2. Roof 3. Plan 4. Foundation 5. Walls",
+    options: ["3, 4, 5, 2, 1", "4, 3, 5, 2, 1", "3, 5, 4, 2, 1", "1, 2, 5, 4, 3"],
+    answer: "A",
+    correctAnswer: "3, 4, 5, 2, 1",
+    solution: "For building a house: Plan → Foundation → Walls → Roof → Paint.",
+    shortcut: "For process questions, identify what must happen first."
+  },
+  {
+    id: "AS-U6-C-24",
+    unit: 6,
+    category: "New Word Formation",
+    topic: "Word Formation",
+    question: "Using the 2nd, 4th and 5th letters of LEMON, which word can be formed?",
+    options: ["ONE", "MEN", "NO", "MEL"],
+    answer: "A",
+    correctAnswer: "ONE",
+    solution: "LEMON letters: 2nd = E, 4th = O, 5th = N. These letters can form ONE.",
+    shortcut: "Extract letters first, then rearrange."
+  },
+  {
+    id: "AS-U6-C-25",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabetical Quibble",
+    question: "If every 5th letter of the English alphabet is replaced by *, what is 6th to the right of the 9th element from the left?",
+    options: ["N", "O", "*", "P"],
+    answer: "C",
+    correctAnswer: "*",
+    solution: "Modified alphabet: A B C D * F G H I * K L M N * P Q R S * U V W X * Z. The 9th element is I. Six to the right is the 15th element, which is *.",
+    shortcut: "After modifying the alphabet, count element positions, not original letters."
+  },
+  {
+    id: "AS-U6-C-26",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabet Position",
+    question: "Which letter is 4th to the left of the 18th letter from the right?",
+    options: ["D", "E", "F", "G"],
+    answer: "B",
+    correctAnswer: "E",
+    solution: "18th from right = 27 - 18 = 9th from left = I. Four to the left of I is E.",
+    shortcut: "First convert right-position to left-position using 27 - n."
+  },
+  {
+    id: "AS-U6-C-27",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabetical Arrangement",
+    question: "If the letters of LOGIC are arranged alphabetically, which letter is 2nd from the right?",
+    options: ["G", "I", "L", "O"],
+    answer: "C",
+    correctAnswer: "L",
+    solution: "LOGIC alphabetically: C, G, I, L, O. Second from the right is L.",
+    shortcut: "Arrange first, then count from the required side."
+  },
+  {
+    id: "AS-U6-C-28",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Reverse Word",
+    question: "If the word REASON is written in reverse order, which letter will be 3rd from the left?",
+    options: ["A", "E", "S", "O"],
+    answer: "C",
+    correctAnswer: "S",
+    solution: "REASON reversed is NOSAER. The 3rd letter from the left is S.",
+    shortcut: "Reverse the word completely before counting."
+  },
+  {
+    id: "AS-U6-C-29",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Dictionary Order",
+    question: "Arrange in dictionary order: Rank, Range, Random, Rapid",
+    options: ["Range, Random, Rank, Rapid", "Random, Range, Rank, Rapid", "Rank, Range, Random, Rapid", "Rapid, Rank, Range, Random"],
+    answer: "B",
+    correctAnswer: "Random, Range, Rank, Rapid",
+    solution: "All start with Ra. Compare next letters: Random has d after Ran, Range has g, Rank has k. Rapid starts with Rap, so it comes after Ran words.",
+    shortcut: "Compare same-prefix words letter by letter."
+  },
+  {
+    id: "AS-U6-C-30",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Logical Sequence",
+    question: "Arrange in logical order: 1. Book 2. Paragraph 3. Word 4. Sentence 5. Essay",
+    options: ["3, 4, 2, 5, 1", "4, 3, 2, 5, 1", "3, 2, 4, 5, 1", "1, 5, 2, 4, 3"],
+    answer: "A",
+    correctAnswer: "3, 4, 2, 5, 1",
+    solution: "Words form sentences, sentences form paragraphs, paragraphs form essays, and essays can form part of a book.",
+    shortcut: "Arrange from smallest language unit to largest."
+  },
+  {
+    id: "AS-U6-C-31",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabet Gap",
+    question: "How many letters are there between J and Q in the English alphabet?",
+    options: ["5", "6", "7", "8"],
+    answer: "B",
+    correctAnswer: "6",
+    solution: "Letters between J and Q are K, L, M, N, O, P. So there are 6 letters.",
+    shortcut: "Letters between two positions = difference - 1."
+  },
+  {
+    id: "AS-U6-C-32",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Alphabet Value",
+    question: "If A=1, B=2, C=3, ..., find the sum of the alphabet positions of CODE.",
+    options: ["25", "26", "27", "28"],
+    answer: "C",
+    correctAnswer: "27",
+    solution: "C=3, O=15, D=4, E=5. Sum = 3+15+4+5 = 27.",
+    shortcut: "Convert each letter into its alphabet number."
+  },
+  {
+    id: "AS-U6-C-33",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Logical Sequence",
+    question: "Arrange in proper order: 1. Teenager 2. Infant 3. Adult 4. Child 5. Old person",
+    options: ["2, 4, 1, 3, 5", "4, 2, 1, 3, 5", "2, 1, 4, 3, 5", "5, 3, 1, 4, 2"],
+    answer: "A",
+    correctAnswer: "2, 4, 1, 3, 5",
+    solution: "Correct life order: Infant → Child → Teenager → Adult → Old person.",
+    shortcut: "For age order, start with the youngest stage."
+  },
+  {
+    id: "AS-U6-C-34",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Letter Interchange",
+    question: "If the first and last letters of TABLE are interchanged, which letter will be 2nd from the left?",
+    options: ["A", "B", "L", "E"],
+    answer: "A",
+    correctAnswer: "A",
+    solution: "TABLE becomes EABLT after interchanging first and last letters. The 2nd letter from the left is A.",
+    shortcut: "Perform the given operation first, then count."
+  },
+  {
+    id: "AS-U6-C-35",
+    unit: 6,
+    category: "Concept MCQ",
+    topic: "Dictionary Order",
+    question: "Which word comes last in dictionary order: Calm, Came, Camp, Cane?",
+    options: ["Calm", "Came", "Camp", "Cane"],
+    answer: "D",
+    correctAnswer: "Cane",
+    solution: "Compare after Ca: l, m, m, n. Since n comes last, Cane is last.",
+    shortcut: "The first different letter decides dictionary ranking."
+  },
+
+  // =====================
+  // 10 TRICKY EXAM MCQs
+  // =====================
+  {
+    id: "AS-U6-T-36",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Alphabetical Quibble",
+    question: "If every fourth letter of the English alphabet is replaced by #, what is ninth to the left of the fourteenth element from the left?",
+    options: ["E", "#", "W", "F"],
+    answer: "A",
+    correctAnswer: "E",
+    solution: "Modified series: A B C # E F G # I J K # M N O # Q R S # U V W # Y Z. The 14th element is N. Ninth to the left of N is E.",
+    shortcut: "In modified alphabet questions, count the new symbols as elements."
+  },
+  {
+    id: "AS-U6-T-37",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Alphabetical Arrangement",
+    question: "If the letters of SUBCONSCIOUS are arranged alphabetically, how many letters remain in the same position?",
+    options: ["None", "One", "Two", "Three"],
+    answer: "B",
+    correctAnswer: "One",
+    solution: "SUBCONSCIOUS alphabetically becomes B C C I N O O S S S U U. Only the 11th letter U remains in the same position.",
+    shortcut: "Write original and alphabetically arranged word one below the other."
+  },
+  {
+    id: "AS-U6-T-38",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Mixed Arrangement",
+    question: "A 7 # B M 3 $ K 9 P @ R 5 T % U 2 V. Which element is 4th to the right of the 7th element from the left?",
+    options: ["9", "P", "@", "R"],
+    answer: "C",
+    correctAnswer: "@",
+    solution: "The 7th element from the left is $. Fourth to the right of $ is @.",
+    shortcut: "First locate the reference element, then count right or left."
+  },
+  {
+    id: "AS-U6-T-39",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Rearranged Alphabet",
+    question: "If the first 13 letters of the alphabet are reversed and the last 13 letters remain unchanged, what is 5th to the right of the 10th letter from the left?",
+    options: ["N", "O", "P", "Q"],
+    answer: "B",
+    correctAnswer: "O",
+    solution: "New order: M L K J I H G F E D C B A N O P Q R S T U V W X Y Z. The 10th letter is D. Five to the right is O.",
+    shortcut: "Create the changed alphabet before solving position questions."
+  },
+  {
+    id: "AS-U6-T-40",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Alphabetical and Reverse Order",
+    question: "The letters of JOURNAL are arranged alphabetically and then reversed. Which letter is 3rd from the left?",
+    options: ["N", "O", "R", "L"],
+    answer: "B",
+    correctAnswer: "O",
+    solution: "JOURNAL alphabetically: A, J, L, N, O, R, U. Reversed: U, R, O, N, L, J, A. Third from the left is O.",
+    shortcut: "Apply operations in the exact order given."
+  },
+  {
+    id: "AS-U6-T-41",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Dictionary Order",
+    question: "Arrange in dictionary order and find the second word: Intervene, Internet, Interval, Internal",
+    options: ["Intervene", "Internet", "Interval", "Internal"],
+    answer: "B",
+    correctAnswer: "Internet",
+    solution: "Dictionary order is: Internal, Internet, Interval, Intervene. Therefore, the second word is Internet.",
+    shortcut: "When prefixes are same, compare the next different letter."
+  },
+  {
+    id: "AS-U6-T-42",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Logical Sequence",
+    question: "Arrange in legal-process order: 1. Trial 2. FIR 3. Judgment 4. Investigation 5. Charge sheet",
+    options: ["2, 4, 5, 1, 3", "4, 2, 5, 1, 3", "2, 5, 4, 1, 3", "1, 2, 4, 5, 3"],
+    answer: "A",
+    correctAnswer: "2, 4, 5, 1, 3",
+    solution: "Typical order: FIR → Investigation → Charge sheet → Trial → Judgment.",
+    shortcut: "For process questions, ask what must happen before the next step."
+  },
+  {
+    id: "AS-U6-T-43",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Letter Pair",
+    question: "How many pairs of letters are there in the word SIMPLE which have as many letters between them in the word as in the English alphabet?",
+    options: ["One", "Two", "Three", "Four"],
+    answer: "C",
+    correctAnswer: "Three",
+    solution: "In SIMPLE, valid pairs are S-P, I-L and I-E. In each pair, the gap in the word matches the alphabet-position gap. So there are 3 pairs.",
+    shortcut: "Check absolute alphabet-position difference and compare with word-position difference."
+  },
+  {
+    id: "AS-U6-T-44",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Meaningful Word Arrangement",
+    question: "Letters C R A N E are numbered 1 2 3 4 5. Which number sequence forms the word RANCE?",
+    options: ["2, 3, 4, 1, 5", "2, 3, 4, 5, 1", "2, 4, 3, 1, 5", "1, 3, 4, 2, 5"],
+    answer: "A",
+    correctAnswer: "2, 3, 4, 1, 5",
+    solution: "2=R, 3=A, 4=N, 1=C, 5=E. Therefore, 2, 3, 4, 1, 5 gives RANCE.",
+    shortcut: "Map every letter to its number, then form the word."
+  },
+  {
+    id: "AS-U6-T-45",
+    unit: 6,
+    category: "Tricky Exam MCQ",
+    topic: "Mixed Arrangement",
+    question: "A # 3 B 5 C $ D 7 E @ 9 F. How many letters are immediately followed by a number?",
+    options: ["One", "Two", "Three", "Four"],
+    answer: "B",
+    correctAnswer: "Two",
+    solution: "Letters immediately followed by a number are B followed by 5 and D followed by 7. So there are 2 such letters.",
+    shortcut: "Scan only letters and check the element immediately after each letter."
+  }
+];
+
+window.analyticalUnit6MCQs = analyticalUnit6MCQs;
