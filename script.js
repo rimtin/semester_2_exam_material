@@ -6,7 +6,7 @@
 
 const QUICK_TEST_LENGTH = 10;
 const TIMER_SECONDS = 120; // 2:00 per question
-const APP_VERSION = "13"; // change this whenever unit files/script are updated
+const APP_VERSION = "14"; // change this whenever unit files/script are updated
 
 // ======================================================
 //  QUESTION NORMALIZATION
@@ -275,7 +275,11 @@ function renderHome() {
 function loadScript(src) {
   return new Promise((resolve) => {
     const s = document.createElement("script");
-    s.src = src;
+    // Extra cache-busting is useful while you are updating unit files locally/GitHub Pages.
+    // It prevents the browser from showing only an older cached unit.
+    const joiner = src.includes("?") ? "&" : "?";
+    s.src = `${src}${joiner}cb=${APP_VERSION}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    s.async = true;
     s.onload = () => resolve(true);
     s.onerror = () => resolve(false); // missing optional files are fine
     document.head.appendChild(s);
@@ -572,25 +576,59 @@ function showMode(mode) {
 // ======================================================
 
 function getUnitNumber(unitText) {
-  const match = String(unitText).match(/Unit\s*(\d+)/i);
+  const match = String(unitText).match(/Unit\s*(\d+)/i) || String(unitText).match(/^(\d+)$/);
   return match ? Number(match[1]) : 999;
 }
 
+function getUnitLabel(unitNo) {
+  const q = [...mcqQuestions, ...longQuestions].find((item) => getUnitNumber(item.unit) === unitNo);
+  return q?.unit || `Unit ${unitNo}`;
+}
+
 function getAllChapters() {
+  // Always show all configured units in the dropdown.
+  // This fixes the issue where the dropdown displayed only the one unit that was already cached/loaded.
+  if (currentSubject?.unitCount) {
+    return Array.from({ length: currentSubject.unitCount }, (_, i) => {
+      const unitNo = i + 1;
+      return { value: String(unitNo), label: getUnitLabel(unitNo) };
+    });
+  }
+
   const chapters = new Map();
   [...mcqQuestions, ...longQuestions].forEach((q) => {
-    if (q.unit && !chapters.has(q.unit)) chapters.set(q.unit, q.unit);
+    const unitNo = getUnitNumber(q.unit);
+    if (unitNo !== 999 && !chapters.has(unitNo)) chapters.set(unitNo, q.unit);
   });
-  return Array.from(chapters.values()).sort((a, b) => getUnitNumber(a) - getUnitNumber(b));
+  return Array.from(chapters.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([unitNo, label]) => ({ value: String(unitNo), label }));
 }
 
 function populateChapterSelect() {
   getAllChapters().forEach((ch) => {
     const opt = document.createElement("option");
-    opt.value = ch;
-    opt.textContent = ch;
+    opt.value = ch.value;
+    opt.textContent = ch.label;
     chapterSelect.appendChild(opt);
   });
+}
+
+function selectedUnitNumber() {
+  return currentChapter === "all" ? null : Number(currentChapter) || getUnitNumber(currentChapter);
+}
+
+function showNoQuestionsForSelection() {
+  const unitNo = selectedUnitNumber();
+  mcqUnitEl.textContent = unitNo ? `Unit ${unitNo}` : "No questions found";
+  mcqCounterEl.textContent = "";
+  mcqQuestionEl.textContent = unitNo
+    ? `No MCQs available for Unit ${unitNo}. Check that subjects/${currentSubject?.id}/units/unit${unitNo}_mcq.js is present and uses window.unit${unitNo}_mcq = [...].`
+    : "No MCQs available.";
+  mcqOptionsEl.innerHTML = "";
+  mcqResultEl.textContent = "";
+  btnHint.classList.add("hidden");
+  hideTimer();
 }
 
 chapterSelect.addEventListener("change", () => {
@@ -602,17 +640,21 @@ chapterSelect.addEventListener("change", () => {
   resetScore();
 
   if (practiceOrder.length > 0) loadMcqQuestion(practiceOrder[practicePosition]);
+  else showNoQuestionsForSelection();
+
   if (filteredLongIndices.length > 0) loadLongQuestionFromFilter();
 });
 
 function updateFilteredIndices() {
+  const unitNo = selectedUnitNumber();
+
   if (coachSet) {
     filteredMcqIndices = [...coachSet.indices];
   } else if (currentChapter === "all") {
     filteredMcqIndices = mcqQuestions.map((_, i) => i);
   } else {
     filteredMcqIndices = mcqQuestions
-      .map((q, i) => (q.unit === currentChapter ? i : -1))
+      .map((q, i) => (getUnitNumber(q.unit) === unitNo ? i : -1))
       .filter((i) => i !== -1);
   }
 
@@ -620,7 +662,7 @@ function updateFilteredIndices() {
     filteredLongIndices = longQuestions.map((_, i) => i);
   } else {
     filteredLongIndices = longQuestions
-      .map((q, i) => (q.unit === currentChapter ? i : -1))
+      .map((q, i) => (getUnitNumber(q.unit) === unitNo ? i : -1))
       .filter((i) => i !== -1);
   }
 }
