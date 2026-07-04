@@ -546,3 +546,104 @@ footer {
   font-size: 0.8rem;
   padding: 0.4rem 0.8rem;
 }
+
+/* ---------- HOME PAGE (v9) ---------- */
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.subject-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  text-align: left;
+  padding: 1.15rem 1.2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+}
+
+.subject-card:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.subject-icon { font-size: 2rem; }
+
+.subject-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.subject-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.subject-stats {
+  margin-top: 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ---------- QUESTION TIMER (v9) ---------- */
+
+.timer {
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+.timer.timer-warn {
+  color: var(--danger);
+  border-color: var(--danger);
+  animation: timer-pulse 1s infinite;
+}
+
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+#timer-toggle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.7rem;
+}
+
+#timer-toggle.timer-off {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
