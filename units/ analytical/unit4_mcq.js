@@ -1,0 +1,560 @@
+// unit4_mcq.js
+// Analytical Skills-II
+// Unit 4: Problem on Trains, Boats and Streams, and Races
+// 15 Self-Assessment Based + 20 Concept MCQs + 10 Tricky Exam MCQs
+
+const analyticalUnit4MCQs = [
+  // =========================
+  // 15 SELF-ASSESSMENT BASED
+  // =========================
+  {
+    id: "AS-U4-SA-01",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Train and Man",
+    question: "A train 125 m long passes a man running at 5 km/hr in the same direction in 10 seconds. Find the speed of the train.",
+    options: ["45 km/hr", "50 km/hr", "54 km/hr", "55 km/hr"],
+    answer: "B",
+    correctAnswer: "50 km/hr",
+    solution: "Relative speed = 125/10 = 12.5 m/s = 45 km/hr. Since man runs in same direction, train speed = 45 + 5 = 50 km/hr.",
+    shortcut: "Same direction: Relative speed = Train speed - Man speed."
+  },
+  {
+    id: "AS-U4-SA-02",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Train and Platform",
+    question: "A train crosses a 150 m platform in 15 seconds and a 250 m platform in 20 seconds. Find the length of the train.",
+    options: ["150 m", "160 m", "165 m", "155 m"],
+    answer: "A",
+    correctAnswer: "150 m",
+    solution: "Let train length be L. Speed is same, so (L + 150)/15 = (L + 250)/20. Solving: 20L + 3000 = 15L + 3750, so L = 150 m.",
+    shortcut: "Same train speed: Distance/time remains equal."
+  },
+  {
+    id: "AS-U4-SA-03",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Two Trains Opposite Direction",
+    question: "Two trains, each 100 m long, moving in opposite directions, cross each other in 8 seconds. If one train is twice as fast as the other, find the speed of the faster train.",
+    options: ["30 km/hr", "45 km/hr", "60 km/hr", "75 km/hr"],
+    answer: "C",
+    correctAnswer: "60 km/hr",
+    solution: "Total distance = 100 + 100 = 200 m. Relative speed = 200/8 = 25 m/s = 90 km/hr. Speeds are in ratio 1:2, so faster speed = 2/3 × 90 = 60 km/hr.",
+    shortcut: "Opposite direction: Relative speed = sum of speeds."
+  },
+  {
+    id: "AS-U4-SA-04",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Train Passing a Man in Another Train",
+    question: "Two trains travel in the same direction at 56 km/hr and 29 km/hr. The faster train passes a man sitting in the slower train in 16 seconds. Find the length of the faster train.",
+    options: ["200 m", "240 m", "120 m", "112 m"],
+    answer: "C",
+    correctAnswer: "120 m",
+    solution: "Relative speed = 56 - 29 = 27 km/hr = 27 × 5/18 = 7.5 m/s. Length = speed × time = 7.5 × 16 = 120 m.",
+    shortcut: "Same direction crossing: Length = relative speed × time."
+  },
+  {
+    id: "AS-U4-SA-05",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Train Speed",
+    question: "A train passes two persons walking in the same direction at 3 km/hr and 5 km/hr in 10 seconds and 11 seconds respectively. Find the speed of the train.",
+    options: ["28 km/hr", "27 km/hr", "25 km/hr", "24 km/hr"],
+    answer: "C",
+    correctAnswer: "25 km/hr",
+    solution: "Let train speed be x km/hr. Same train length gives 10(x - 3) = 11(x - 5). So 10x - 30 = 11x - 55, hence x = 25 km/hr.",
+    shortcut: "Same train length: relative speed × time is same."
+  },
+  {
+    id: "AS-U4-SA-06",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Train Speed Ratio",
+    question: "Two trains start simultaneously from Howrah and Patna towards each other. After meeting, they reach their destinations in 9 hours and 16 hours respectively. Find the ratio of their speeds.",
+    options: ["2:3", "4:3", "6:7", "None"],
+    answer: "B",
+    correctAnswer: "4:3",
+    solution: "Speed ratio = √time taken by second train after meeting : √time taken by first train after meeting = √16 : √9 = 4:3.",
+    shortcut: "After meeting: Speed ratio = √t2 : √t1."
+  },
+  {
+    id: "AS-U4-SA-07",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Boat in Still Water",
+    question: "A boat running downstream covers 16 km in 2 hours and covers the same distance upstream in 4 hours. Find the speed of the boat in still water.",
+    options: ["4 km/hr", "6 km/hr", "8 km/hr", "Data inadequate"],
+    answer: "B",
+    correctAnswer: "6 km/hr",
+    solution: "Downstream speed = 16/2 = 8 km/hr. Upstream speed = 16/4 = 4 km/hr. Boat speed in still water = (8 + 4)/2 = 6 km/hr.",
+    shortcut: "Boat speed = (Downstream speed + Upstream speed)/2."
+  },
+  {
+    id: "AS-U4-SA-08",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Boat and Stream",
+    question: "The current of a stream is 1 km/hr. A motorboat goes 35 km upstream and returns to the starting point in 12 hours. Find the speed of the motorboat in still water.",
+    options: ["8 km/hr", "6 km/hr", "7.5 km/hr", "5.5 km/hr"],
+    answer: "B",
+    correctAnswer: "6 km/hr",
+    solution: "Let boat speed be x. Then upstream speed = x - 1 and downstream speed = x + 1. So 35/(x - 1) + 35/(x + 1) = 12. Solving gives x = 6 km/hr.",
+    shortcut: "Round trip time = Distance/(B - S) + Distance/(B + S)."
+  },
+  {
+    id: "AS-U4-SA-09",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Boat-Speed Ratio",
+    question: "A man takes twice as long to row a distance upstream as to row the same distance downstream. Find the ratio of boat speed in still water to stream speed.",
+    options: ["2:1", "3:1", "3:2", "4:3"],
+    answer: "B",
+    correctAnswer: "3:1",
+    solution: "For same distance, upstream time is twice downstream time, so downstream speed is twice upstream speed. B + S = 2(B - S). Thus B = 3S. Ratio B:S = 3:1.",
+    shortcut: "Same distance: speed ratio is inverse of time ratio."
+  },
+  {
+    id: "AS-U4-SA-10",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Stream Speed",
+    question: "A boatman rows 45 km downstream and comes back in 20 hours. He can row 12 km downstream in the same time as 4 km upstream. Find the speed of the stream.",
+    options: ["3 km/hr", "2.5 km/hr", "4 km/hr", "3.5 km/hr"],
+    answer: "A",
+    correctAnswer: "3 km/hr",
+    solution: "Since 12 km downstream takes same time as 4 km upstream, downstream speed : upstream speed = 12:4 = 3:1. Let upstream speed = u, downstream = 3u. Total time: 45/3u + 45/u = 20. So 60/u = 20, u = 3. Stream speed = (9 - 3)/2 = 3 km/hr.",
+    shortcut: "Stream speed = (Downstream speed - Upstream speed)/2."
+  },
+  {
+    id: "AS-U4-SA-11",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Stream Speed",
+    question: "A boat covers 36 km downstream in 6 hours, which is 3 hours less than the time taken upstream for the same distance. Find the speed of the stream.",
+    options: ["1 km/hr", "1.5 km/hr", "0.75 km/hr", "0.5 km/hr"],
+    answer: "A",
+    correctAnswer: "1 km/hr",
+    solution: "Downstream speed = 36/6 = 6 km/hr. Upstream time = 6 + 3 = 9 hours, so upstream speed = 36/9 = 4 km/hr. Stream speed = (6 - 4)/2 = 1 km/hr.",
+    shortcut: "Stream speed = half of downstream-upstream speed difference."
+  },
+  {
+    id: "AS-U4-SA-12",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Race",
+    question: "In a 100 m race, A beats B by 10 m and C by 13 m. In a race of 180 m, by how much will B beat C?",
+    options: ["5.4 m", "4.5 m", "5 m", "6 m"],
+    answer: "D",
+    correctAnswer: "6 m",
+    solution: "A:B = 100:90 and A:C = 100:87. So B:C = 90:87. When B runs 180 m, C runs 180 × 87/90 = 174 m. Hence B beats C by 6 m.",
+    shortcut: "Convert race results into speed ratios."
+  },
+  {
+    id: "AS-U4-SA-13",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Race Time",
+    question: "In a 200 m race, A beats B by 35 m or 7 seconds. Find A's time over the course.",
+    options: ["40 seconds", "47 seconds", "33 seconds", "None"],
+    answer: "C",
+    correctAnswer: "33 seconds",
+    solution: "B covers 35 m in 7 seconds, so B's speed = 5 m/s. When A finishes 200 m, B has run 165 m. Time taken = 165/5 = 33 seconds.",
+    shortcut: "Beat distance/time gives slower runner's speed."
+  },
+  {
+    id: "AS-U4-SA-14",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Race with Start",
+    question: "A and B take part in a 100 m race. A runs at 5 km/hr. A gives B a start of 8 m and still beats him by 8 seconds. Find B's speed.",
+    options: ["5.15 km/hr", "4.14 km/hr", "4.25 km/hr", "4.4 km/hr"],
+    answer: "B",
+    correctAnswer: "4.14 km/hr",
+    solution: "A's speed = 5 km/hr = 25/18 m/s. Time taken by A for 100 m = 100 ÷ 25/18 = 72 seconds. Since B loses by 8 seconds, B takes 80 seconds to cover 92 m. B's speed = 92/80 m/s = 1.15 m/s = 4.14 km/hr.",
+    shortcut: "Start means B covers race distance minus start."
+  },
+  {
+    id: "AS-U4-SA-15",
+    unit: 4,
+    category: "Self-Assessment Based",
+    topic: "Boat Round Trip",
+    question: "In a stream running at 2 km/hr, a motorboat goes 10 km upstream and returns in 55 minutes. Find the speed of the motorboat in still water.",
+    options: ["2 km/hr", "11 km/hr", "22 km/hr", "None"],
+    answer: "C",
+    correctAnswer: "22 km/hr",
+    solution: "Let boat speed be x. Time = 10/(x - 2) + 10/(x + 2) = 55/60 = 11/12. Solving gives x = 22 km/hr.",
+    shortcut: "Round trip time = d/(B-S) + d/(B+S)."
+  },
+
+  // =================
+  // 20 CONCEPT MCQs
+  // =================
+  {
+    id: "AS-U4-C-16",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Train Crossing Pole",
+    question: "A train runs at 36 km/hr and crosses a pole in 25 seconds. Find the length of the train.",
+    options: ["200 m", "225 m", "250 m", "275 m"],
+    answer: "C",
+    correctAnswer: "250 m",
+    solution: "Speed = 36 × 5/18 = 10 m/s. Length = speed × time = 10 × 25 = 250 m.",
+    shortcut: "Crossing pole: Train length = speed × time."
+  },
+  {
+    id: "AS-U4-C-17",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Train Crossing Platform",
+    question: "A 50 m long train passes a 100 m platform in 10 seconds. Find the speed of the train.",
+    options: ["15 m/s", "20 m/s", "25 m/s", "30 m/s"],
+    answer: "A",
+    correctAnswer: "15 m/s",
+    solution: "Total distance = train length + platform length = 50 + 100 = 150 m. Speed = 150/10 = 15 m/s.",
+    shortcut: "Crossing platform: Distance = train length + platform length."
+  },
+  {
+    id: "AS-U4-C-18",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Train and Moving Man",
+    question: "A 500 m train runs at 63 km/hr. How long will it take to cross a man walking at 3 km/hr in the same direction?",
+    options: ["20 seconds", "25 seconds", "30 seconds", "35 seconds"],
+    answer: "C",
+    correctAnswer: "30 seconds",
+    solution: "Relative speed = 63 - 3 = 60 km/hr = 60 × 5/18 = 50/3 m/s. Time = 500 ÷ 50/3 = 30 seconds.",
+    shortcut: "Same direction: subtract speeds."
+  },
+  {
+    id: "AS-U4-C-19",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Two Trains",
+    question: "Two trains of equal length 120 m take 10 seconds and 15 seconds to cross a pole. In how many seconds will they cross each other in opposite directions?",
+    options: ["10 seconds", "12 seconds", "15 seconds", "18 seconds"],
+    answer: "B",
+    correctAnswer: "12 seconds",
+    solution: "Speed of first train = 120/10 = 12 m/s. Speed of second train = 120/15 = 8 m/s. Relative speed = 20 m/s. Total distance = 120 + 120 = 240 m. Time = 240/20 = 12 seconds.",
+    shortcut: "Opposite direction: add speeds and add train lengths."
+  },
+  {
+    id: "AS-U4-C-20",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Two Trains Opposite",
+    question: "Two trains travel in opposite directions at 36 km/hr and 45 km/hr. A man sitting in the slower train passes the faster train in 8 seconds. Find the length of the faster train.",
+    options: ["160 m", "170 m", "180 m", "200 m"],
+    answer: "C",
+    correctAnswer: "180 m",
+    solution: "Relative speed = 36 + 45 = 81 km/hr = 81 × 5/18 = 22.5 m/s. Length of faster train = 22.5 × 8 = 180 m.",
+    shortcut: "Man inside train is a point, so distance covered is only the other train's length."
+  },
+  {
+    id: "AS-U4-C-21",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Platform Length",
+    question: "A train passes a man in 20 seconds and a platform in 36 seconds. If the speed of the train is 54 km/hr, find the length of the platform.",
+    options: ["200 m", "220 m", "240 m", "260 m"],
+    answer: "C",
+    correctAnswer: "240 m",
+    solution: "Speed = 54 × 5/18 = 15 m/s. Train length = 15 × 20 = 300 m. Total distance while crossing platform = 15 × 36 = 540 m. Platform length = 540 - 300 = 240 m.",
+    shortcut: "Platform length = total crossing distance - train length."
+  },
+  {
+    id: "AS-U4-C-22",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Downstream",
+    question: "A person swims at 13 km/hr in still water. If stream speed is 4 km/hr, how much time will he take to swim 68 km downstream?",
+    options: ["3 hours", "4 hours", "5 hours", "6 hours"],
+    answer: "B",
+    correctAnswer: "4 hours",
+    solution: "Downstream speed = 13 + 4 = 17 km/hr. Time = 68/17 = 4 hours.",
+    shortcut: "Downstream speed = boat speed + stream speed."
+  },
+  {
+    id: "AS-U4-C-23",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Boat in Still Water",
+    question: "A boat goes 13 km/hr downstream and 7 km/hr upstream. Find the speed of the boat in still water.",
+    options: ["8 km/hr", "9 km/hr", "10 km/hr", "11 km/hr"],
+    answer: "C",
+    correctAnswer: "10 km/hr",
+    solution: "Boat speed in still water = (13 + 7)/2 = 10 km/hr.",
+    shortcut: "Boat speed = (D + U)/2."
+  },
+  {
+    id: "AS-U4-C-24",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Upstream and Downstream",
+    question: "A boat sails 15 km upstream in 5 hours. The stream speed is one-fourth of the boat speed in still water. How long will it take to cover 15 km downstream?",
+    options: ["2 hours", "3 hours", "4 hours", "5 hours"],
+    answer: "B",
+    correctAnswer: "3 hours",
+    solution: "Upstream speed = 15/5 = 3 km/hr. Let boat speed = B and stream speed = B/4. Then B - B/4 = 3, so 3B/4 = 3 and B = 4. Stream = 1. Downstream speed = 5 km/hr. Time = 15/5 = 3 hours.",
+    shortcut: "Use U = B - S and D = B + S."
+  },
+  {
+    id: "AS-U4-C-25",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Boat Speed",
+    question: "A man rows a distance upstream in 6 hours and downstream in 4 hours. If stream speed is 2 km/hr, find the speed of the man in still water.",
+    options: ["8 km/hr", "10 km/hr", "12 km/hr", "14 km/hr"],
+    answer: "B",
+    correctAnswer: "10 km/hr",
+    solution: "For same distance: 6(B - 2) = 4(B + 2). So 6B - 12 = 4B + 8, hence 2B = 20 and B = 10 km/hr.",
+    shortcut: "Same distance: upstream time × upstream speed = downstream time × downstream speed."
+  },
+  {
+    id: "AS-U4-C-26",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Stream Ratio",
+    question: "A man rows downstream at 12 km/hr and upstream at 8 km/hr. Find the ratio of stream speed to boat speed in still water.",
+    options: ["1:4", "1:5", "2:5", "3:5"],
+    answer: "B",
+    correctAnswer: "1:5",
+    solution: "Stream speed = (12 - 8)/2 = 2 km/hr. Boat speed = (12 + 8)/2 = 10 km/hr. Ratio = 2:10 = 1:5.",
+    shortcut: "Stream = (D-U)/2 and boat = (D+U)/2."
+  },
+  {
+    id: "AS-U4-C-27",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Round Trip Boat",
+    question: "A motorboat speed in still water is 15 km/hr. It goes 30 km downstream and returns in 4 hours 30 minutes. Find the speed of the stream.",
+    options: ["3 km/hr", "4 km/hr", "5 km/hr", "6 km/hr"],
+    answer: "C",
+    correctAnswer: "5 km/hr",
+    solution: "Let stream speed be S. Then 30/(15+S) + 30/(15-S) = 4.5. Solving gives S = 5 km/hr.",
+    shortcut: "Round trip time = d/(B+S) + d/(B-S)."
+  },
+  {
+    id: "AS-U4-C-28",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Stream Speed Relation",
+    question: "A river flows at 4 km/hr. The downstream speed of a boat is thrice its upstream speed. Find the speed of the boat in still water.",
+    options: ["6 km/hr", "8 km/hr", "10 km/hr", "12 km/hr"],
+    answer: "B",
+    correctAnswer: "8 km/hr",
+    solution: "Let upstream speed be x. Downstream speed = 3x. Stream speed = (3x - x)/2 = x. Given stream speed = 4, so x = 4. Boat speed = (3x + x)/2 = 2x = 8 km/hr.",
+    shortcut: "Boat speed = average of upstream and downstream speeds."
+  },
+  {
+    id: "AS-U4-C-29",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Race",
+    question: "In a 100 m race, A can give B 10 m and C 28 m. In the same race, how much start can B give C?",
+    options: ["15 m", "18 m", "20 m", "25 m"],
+    answer: "C",
+    correctAnswer: "20 m",
+    solution: "A:B = 100:90 and A:C = 100:72. So B:C = 90:72. When B runs 100 m, C runs 100 × 72/90 = 80 m. Hence B can give C 20 m.",
+    shortcut: "Use speed ratios from given starts."
+  },
+  {
+    id: "AS-U4-C-30",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Race with Start",
+    question: "In a 500 m race, speed ratio of A and B is 3:4. A gets a start of 140 m. By how much does A win?",
+    options: ["10 m", "20 m", "30 m", "40 m"],
+    answer: "B",
+    correctAnswer: "20 m",
+    solution: "A needs to run 500 - 140 = 360 m. When A runs 3 parts, B runs 4 parts. When A runs 360 m, B runs 360 × 4/3 = 480 m. B is 20 m short, so A wins by 20 m.",
+    shortcut: "Start reduces the distance to be covered by that runner."
+  },
+  {
+    id: "AS-U4-C-31",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Race Time",
+    question: "In a 100 m race, A covers the distance in 36 seconds and B in 45 seconds. By how much does A beat B?",
+    options: ["15 m", "20 m", "25 m", "30 m"],
+    answer: "B",
+    correctAnswer: "20 m",
+    solution: "When A finishes in 36 seconds, B covers 100 × 36/45 = 80 m. Hence A beats B by 20 m.",
+    shortcut: "Distance covered by slower runner = total distance × faster time/slower time."
+  },
+  {
+    id: "AS-U4-C-32",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Train Speed",
+    question: "A 150 m long train crosses a pole in 10 seconds. Find its speed in km/hr.",
+    options: ["48 km/hr", "54 km/hr", "60 km/hr", "72 km/hr"],
+    answer: "B",
+    correctAnswer: "54 km/hr",
+    solution: "Speed = 150/10 = 15 m/s. Convert to km/hr: 15 × 18/5 = 54 km/hr.",
+    shortcut: "m/s to km/hr: multiply by 18/5."
+  },
+  {
+    id: "AS-U4-C-33",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Train and Platform",
+    question: "A 200 m long train crosses a 300 m platform in 25 seconds. Find the train speed.",
+    options: ["54 km/hr", "60 km/hr", "72 km/hr", "80 km/hr"],
+    answer: "C",
+    correctAnswer: "72 km/hr",
+    solution: "Total distance = 200 + 300 = 500 m. Speed = 500/25 = 20 m/s = 20 × 18/5 = 72 km/hr.",
+    shortcut: "Crossing platform distance = train length + platform length."
+  },
+  {
+    id: "AS-U4-C-34",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Boat Speed",
+    question: "A boat moves downstream at 20 km/hr and upstream at 12 km/hr. Find its speed in still water.",
+    options: ["14 km/hr", "16 km/hr", "18 km/hr", "20 km/hr"],
+    answer: "B",
+    correctAnswer: "16 km/hr",
+    solution: "Boat speed in still water = (20 + 12)/2 = 16 km/hr.",
+    shortcut: "Boat speed = average of downstream and upstream speeds."
+  },
+  {
+    id: "AS-U4-C-35",
+    unit: 4,
+    category: "Concept MCQ",
+    topic: "Stream Speed",
+    question: "A boat moves downstream at 18 km/hr and upstream at 10 km/hr. Find the speed of the stream.",
+    options: ["3 km/hr", "4 km/hr", "5 km/hr", "6 km/hr"],
+    answer: "B",
+    correctAnswer: "4 km/hr",
+    solution: "Stream speed = (18 - 10)/2 = 4 km/hr.",
+    shortcut: "Stream speed = half of downstream-upstream difference."
+  },
+
+  // =====================
+  // 10 TRICKY EXAM MCQs
+  // =====================
+  {
+    id: "AS-U4-T-36",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Two Trains Same Direction",
+    question: "Two trains of lengths 200 m and 100 m run in the same direction at 80 km/hr and 50 km/hr. How long will the faster train take to completely cross the slower train?",
+    options: ["30 seconds", "36 seconds", "40 seconds", "45 seconds"],
+    answer: "B",
+    correctAnswer: "36 seconds",
+    solution: "Total distance = 200 + 100 = 300 m. Relative speed = 80 - 50 = 30 km/hr = 25/3 m/s. Time = 300 ÷ 25/3 = 36 seconds.",
+    shortcut: "Same direction two trains: time = sum of lengths / difference of speeds."
+  },
+  {
+    id: "AS-U4-T-37",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Two Trains Opposite Direction",
+    question: "Two trains of lengths 150 m and 250 m run in opposite directions at 45 km/hr and 55 km/hr. Find the time taken to cross each other.",
+    options: ["12.4 seconds", "14.4 seconds", "16.4 seconds", "18.4 seconds"],
+    answer: "B",
+    correctAnswer: "14.4 seconds",
+    solution: "Total distance = 150 + 250 = 400 m. Relative speed = 45 + 55 = 100 km/hr = 250/9 m/s. Time = 400 ÷ 250/9 = 14.4 seconds.",
+    shortcut: "Opposite direction two trains: time = sum of lengths / sum of speeds."
+  },
+  {
+    id: "AS-U4-T-38",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Train Length",
+    question: "A train crosses a bridge of 250 m in 30 seconds and crosses a pole in 10 seconds. Find the length of the train.",
+    options: ["100 m", "125 m", "150 m", "175 m"],
+    answer: "B",
+    correctAnswer: "125 m",
+    solution: "Let train length be L. Speed while crossing pole = L/10. While crossing bridge, speed = (L+250)/30. So L/10 = (L+250)/30. Hence 3L = L + 250, so L = 125 m.",
+    shortcut: "Crossing pole gives train length only; crossing bridge gives train + bridge."
+  },
+  {
+    id: "AS-U4-T-39",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Boat and Stream",
+    question: "A boat covers 24 km downstream in 3 hours and the same distance upstream in 6 hours. Find the speed of the boat in still water and stream speed.",
+    options: ["6 km/hr, 2 km/hr", "8 km/hr, 4 km/hr", "10 km/hr, 2 km/hr", "12 km/hr, 4 km/hr"],
+    answer: "A",
+    correctAnswer: "6 km/hr, 2 km/hr",
+    solution: "Downstream speed = 24/3 = 8 km/hr. Upstream speed = 24/6 = 4 km/hr. Boat speed = (8+4)/2 = 6 km/hr. Stream speed = (8-4)/2 = 2 km/hr.",
+    shortcut: "Boat = (D+U)/2 and Stream = (D-U)/2."
+  },
+  {
+    id: "AS-U4-T-40",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Round Trip Boat",
+    question: "A boat has speed 12 km/hr in still water and stream speed is 3 km/hr. How long will it take to go 45 km downstream and return?",
+    options: ["6 hours", "7 hours", "8 hours", "9 hours"],
+    answer: "C",
+    correctAnswer: "8 hours",
+    solution: "Downstream speed = 12 + 3 = 15 km/hr. Upstream speed = 12 - 3 = 9 km/hr. Total time = 45/15 + 45/9 = 3 + 5 = 8 hours.",
+    shortcut: "Round trip time = d/(B+S) + d/(B-S)."
+  },
+  {
+    id: "AS-U4-T-41",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Race Ratio",
+    question: "In a 100 m race, A beats B by 20 m and B beats C by 25 m. By how much will A beat C in a 100 m race?",
+    options: ["30 m", "35 m", "40 m", "45 m"],
+    answer: "C",
+    correctAnswer: "40 m",
+    solution: "A:B = 100:80. B:C = 100:75. Therefore A:C = 100:80 × 100:75 gives C distance when A runs 100 = 80 × 75/100 = 60 m. A beats C by 40 m.",
+    shortcut: "Chain race ratios carefully: A:B and B:C."
+  },
+  {
+    id: "AS-U4-T-42",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Race Speed",
+    question: "A can give B a start of 20 m in a 200 m race. If A runs 200 m in 40 seconds, find B's speed.",
+    options: ["15.2 km/hr", "16.2 km/hr", "17.2 km/hr", "18.2 km/hr"],
+    answer: "B",
+    correctAnswer: "16.2 km/hr",
+    solution: "When A runs 200 m in 40 seconds, B runs 180 m in 40 seconds. B's speed = 180/40 = 4.5 m/s = 4.5 × 18/5 = 16.2 km/hr.",
+    shortcut: "Start of 20 m means B runs 180 m while A runs 200 m."
+  },
+  {
+    id: "AS-U4-T-43",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Platform Length",
+    question: "A train running at 90 km/hr crosses a pole in 8 seconds and a platform in 20 seconds. Find the length of the platform.",
+    options: ["250 m", "300 m", "350 m", "400 m"],
+    answer: "B",
+    correctAnswer: "300 m",
+    solution: "Speed = 90 × 5/18 = 25 m/s. Train length = 25 × 8 = 200 m. Total distance while crossing platform = 25 × 20 = 500 m. Platform length = 500 - 200 = 300 m.",
+    shortcut: "Platform length = speed × platform-crossing time - train length."
+  },
+  {
+    id: "AS-U4-T-44",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Stream Speed",
+    question: "A boat rows 48 km downstream in 4 hours and returns upstream in 6 hours. Find the speed of the stream.",
+    options: ["1 km/hr", "2 km/hr", "3 km/hr", "4 km/hr"],
+    answer: "B",
+    correctAnswer: "2 km/hr",
+    solution: "Downstream speed = 48/4 = 12 km/hr. Upstream speed = 48/6 = 8 km/hr. Stream speed = (12 - 8)/2 = 2 km/hr.",
+    shortcut: "Stream speed = (downstream speed - upstream speed)/2."
+  },
+  {
+    id: "AS-U4-T-45",
+    unit: 4,
+    category: "Tricky Exam MCQ",
+    topic: "Train and Moving Man",
+    question: "A 180 m train crosses a man walking in the opposite direction at 6 km/hr in 9 seconds. Find the speed of the train.",
+    options: ["60 km/hr", "66 km/hr", "72 km/hr", "78 km/hr"],
+    answer: "B",
+    correctAnswer: "66 km/hr",
+    solution: "Relative speed = 180/9 = 20 m/s = 72 km/hr. Since man is walking in opposite direction, train speed = 72 - 6 = 66 km/hr.",
+    shortcut: "Opposite direction: Relative speed = train speed + man speed."
+  }
+];
+
+window.analyticalUnit4MCQs = analyticalUnit4MCQs;
