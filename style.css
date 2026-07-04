@@ -647,3 +647,11 @@ footer {
   opacity: 0.55;
   text-decoration: line-through;
 }
+
+/* diagnostic empty-state (v11) */
+.question-text.diagnostic {
+  white-space: pre-line;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
